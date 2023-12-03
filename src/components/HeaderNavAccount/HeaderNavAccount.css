@@ -1,0 +1,29 @@
+.header__block{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__button-account{
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  border: #AAAAAA 2px solid;
+  border-radius: 50px;
+  padding: 8px 12px;
+  transition: all .5s;
+}
+
+.header__button-account:hover {
+  opacity: 0.5;
+}
+.header__button-account:hover .header__button-acc-img{
+  opacity: 0.5;
+}
+
+.header__button-acc-img{
+  margin: 0 7px 0 0;
+  transition: all .5s;
+}

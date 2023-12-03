@@ -1,0 +1,25 @@
+.elements {
+  padding: 80px 0 80px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .elements {
+    gap: 36px 30px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .elements {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .elements {
+    padding: 50px 0 80px;
+    gap: 20px;
+  }
+}

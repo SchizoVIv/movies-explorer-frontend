@@ -1,0 +1,47 @@
+.movies {
+  background-color: #FAFAFA;
+  max-width: 1280px;
+  padding: 70px 70px 80px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.further {
+  display: flex;
+  justify-content: center;
+}
+
+.further__button {
+  max-width: 320px;
+  width: 100%;
+  height: 36px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  background-color: #F4F4F4;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.further__button:hover{
+  background-color: #DDDEE3;
+}
+
+@media screen and (max-width: 768px) {
+  .movies {
+    background-color: #FAFAFA;
+    max-width: 768px;
+    padding: 80px 30px 80px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .movies {
+    background-color: #FAFAFA;
+    max-width: 320px;
+    padding: 80px 10px 50px;
+  }
+  .further__button {
+    max-width: 240px;
+  }
+}
