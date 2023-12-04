@@ -8,7 +8,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList"
 
 function Movies() {
   return (
-    <>
+    <main className="main">
       <Header />
       <section className="movies">
         <SearchForm />
@@ -18,7 +18,7 @@ function Movies() {
         </div>
       </section>
       <Footer />
-    </>
+    </main>
   );
 }
 

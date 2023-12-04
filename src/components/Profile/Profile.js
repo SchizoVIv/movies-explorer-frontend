@@ -3,7 +3,7 @@ import Header from "../Header/Header.js"
 
 function Profile() {
   return (
-    <>
+    <main className="main">
       <Header />
       <section className="profile">
         <h2 className="profile__title">Привет, Виталий!</h2>
@@ -34,7 +34,7 @@ function Profile() {
           <button className="profile__button-exit link-hover">Выйти из аккаунта</button>
         </div>
       </section>
-    </>
+    </main>
   );
 }
 

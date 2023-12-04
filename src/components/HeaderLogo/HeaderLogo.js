@@ -7,7 +7,11 @@ function HeaderLogo(props) {
   const LoggidIn = true;
   return(
     <div className="logo">
-      <Link className="logo__link" rel="stylesheet" to="/">
+      <Link
+        className="logo__link"
+        rel="stylesheet"
+        to="/"
+        target="_blank">
         <img src={logo} alt="логотип" />
       </Link>
       {LoggidIn & props.mobile === false ? (

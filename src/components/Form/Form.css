@@ -74,6 +74,7 @@
   color: white;
   margin: 69px 0 0;
   letter-spacing: -1px;
+  transition: all 0.5s;
 }
 .form__action-text{
   color: #A0A0A0;

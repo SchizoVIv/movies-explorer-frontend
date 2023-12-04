@@ -61,12 +61,6 @@
   display: none;
 }
 
-
-
-
-
-
-
 .header-conteiner{
   width: 100%;
 }
@@ -86,7 +80,7 @@
     transition: all 0.5s;
   }
 
-  .burger__overlay {
+  .header__overlay {
     position: fixed;
     height: 100vh;
     right: -100%;
@@ -172,12 +166,30 @@
     width: 100%;
   }
 
-  .burger-open {
+  .header-open {
     right: 0;
     transition: all 0.5s;
   }
 
-  .burger-hidden {
+  .header-hidden {
+    display: none;
+    transition: all 0.5s;
+  }
+
+  .header__list_open {
+    right: 0;
+    transition: all 0.5s;
+  }
+
+  .header__item_hidden {
+    display: none;
+    transition: all 0.5s;
+  }
+  .header__link_hidden {
+    display: none;
+    transition: all 0.5s;
+  }
+  .header__list_hidden {
     display: none;
     transition: all 0.5s;
   }

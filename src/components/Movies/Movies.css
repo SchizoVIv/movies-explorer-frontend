@@ -21,10 +21,17 @@
   background-color: #F4F4F4;
   transition: all 0.5s;
   cursor: pointer;
+  border-radius: 6px;
 }
 
 .further__button:hover{
   background-color: #DDDEE3;
+}
+
+@media screen and (max-width: 989px) {
+  .movies {
+    padding: 80px 30px 80px;
+  }
 }
 
 @media screen and (max-width: 768px) {

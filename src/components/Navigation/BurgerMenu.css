@@ -57,11 +57,11 @@
     transform: translateY(-50%) rotate(-45deg);
   }
 
-  .burger__overlay_open {
+  .header__overlay_open {
     right: 0;
   }
 
-  .burger__overlay_hidden {
+  .header__overlay_hidden {
     display: none;
   }
 
@@ -119,11 +119,11 @@
     width: 20px;
   }
 
-  .burger__overlay_open {
+  .header__overlay_open {
     right: 0;
   }
 
-  .burger__overlay_hidden {
+  .header__overlay_hidden {
     display: none;
   }
 

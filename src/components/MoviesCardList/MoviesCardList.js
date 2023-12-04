@@ -7,7 +7,7 @@ function MoviesCardList() {
   const location = useLocation();
   if(location.pathname === '/movies') {
     return(
-      <div className="elements">
+      <ul className="elements">
         {initialMovies.map((card) => {
           return(
             <MoviesCard
@@ -17,7 +17,7 @@ function MoviesCardList() {
               } />
           )
         })}
-      </div>
+      </ul>
     )
   } else if(location.pathname === '/saved-movies') {
     return(

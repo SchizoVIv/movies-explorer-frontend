@@ -2,7 +2,7 @@ import "./MoviesCard.css"
 
 function MoviesCard(props) {
     return(
-      <div className="element">
+      <li className="element">
         <img
           className="element__image"
           src={props.card.image}
@@ -19,7 +19,7 @@ function MoviesCard(props) {
             aria-label="В избранное"
           ></button>
         </div>
-      </div>
+      </li>
     )
 }
 

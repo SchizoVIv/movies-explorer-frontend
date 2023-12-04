@@ -21,6 +21,7 @@
   width: 0;
   z-index: -1;
 }
+
 .search-form__slider-switch{
   background: #F4F4F4;
   border-radius: 20px;
@@ -78,9 +79,11 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 20px;
+  transition: all .5s;
 }
 .search-form__input:focus {
   outline: none;
+  border-bottom: #3456F3 1px solid;
 }
 .search-form__block-of-buttons{
   display: flex;
@@ -96,7 +99,8 @@
   background-repeat: no-repeat;
   background-position: 50%;
   cursor: pointer;
-  margin: 0 19px 0 0;
+  margin: 0 19px 0 20px;
+  transition: all 0.5s;
 }
 /* .search-form__line{
   width: 1px;

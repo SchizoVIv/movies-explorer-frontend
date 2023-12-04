@@ -3,8 +3,9 @@ import Form from "../Form/Form.js"
 
 function Register(props){
   return(
-    <section className="register">
+    <main className="main">
     <Form
+      className="register"
       title="Добро пожаловать!"
       textButton="Зарегистрироваться"
       textAction="Уже зарегистрированы?"
@@ -27,7 +28,7 @@ function Register(props){
         </div>
       </div>
     </Form>
-    </section>
+    </main>
   )
 }
 

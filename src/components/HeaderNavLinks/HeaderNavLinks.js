@@ -9,12 +9,12 @@ function HeaderNavLinks(props) {
   if (props.burger) {
     headerLinkClass = 'header__link header__link_active';
   } else {
-    headerLinkClass += ' burger-hidden';
+    headerLinkClass += ' header__link_hidden';
   }
 
   let headerItemClass = 'header__item';
   if (!props.burger) {
-    headerItemClass += ' burger-hidden';
+    headerItemClass += ' header__item_hidden';
   }
 
   return(
@@ -23,15 +23,27 @@ function HeaderNavLinks(props) {
         burger={props.burger}
         setBurger={props.setBurger} />
       <ul
-        className={props.burger ? ['header__list burger-open'] : ['header__list burger-hidden']}>
+        className={props.burger ? ['header__list header__list_open'] : ['header__list header__list_hidden']}>
         <li className={headerItemClass}>
-          <Link className={headerLinkClass} to="/"> Главная</Link>
+          <Link
+            className={headerLinkClass}
+            to="/"
+            target="_blank"
+          > Главная</Link>
         </li>
         <li className={headerItemClass}>
-          <Link className={headerLinkClass} to="/movies">Фильмы</Link>
+          <Link
+            className={headerLinkClass}
+            to="/movies"
+            target="_blank"
+            >Фильмы</Link>
         </li>
         <li className={headerItemClass}>
-          <Link className={headerLinkClass} to="/saved-movies">Сохраненные фильмы</Link>
+          <Link
+            className={headerLinkClass}
+            to="/saved-movies"
+            target="_blank"
+          >Сохраненные фильмы</Link>
         </li>
         <li className={headerItemClass}>
           <HeaderNavAccount />

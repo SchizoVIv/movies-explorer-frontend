@@ -12,7 +12,7 @@ function BurgerMenu(props) {
   return (
     <>
       <div
-        className={props.burger ? ['burger__overlay burger__overlay_open'] : ['burger__overlay burger__overlay_hidden']}></div>
+        className={props.burger ? ['header__overlay header__overlay_open'] : ['header__overlay header__overlay_hidden']}></div>
       <div
         className={props.burger ? ["burger active"] : ["burger"]}
         id="burger"

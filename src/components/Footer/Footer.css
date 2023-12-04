@@ -45,7 +45,7 @@
 
 @media screen and (max-width: 768px) {
   .footer {
-    background-color: none;
+    background: none;
     max-width: 768px;
     padding: 0 30px;
     margin: 0 auto;
@@ -54,7 +54,7 @@
 
 @media screen and (max-width: 500px) {
   .footer {
-    background-color: none;
+    background: none;
     max-width: 320px;
     padding: 0 10px;
     margin: 0 auto;

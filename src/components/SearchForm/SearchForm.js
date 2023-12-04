@@ -3,6 +3,8 @@ import "./SearchForm.css"
 import React from "react"
 import magnifier from "../../images/magnifier.svg"
 function SearchForm() {
+
+
   const [slider, setSlider] = useState(true);
   function clickSlider(e) {
     e.preventDefault();
@@ -12,7 +14,7 @@ function SearchForm() {
   return (
       <div className="search-form">
         <div className="search-form__conteiner">
-          <div className="search-form__box">
+          <form className="search-form__box">
             <img className="search-form__magnifier" src={magnifier} alt="magnifier" />
             <input
               className="search-form__input"
@@ -21,8 +23,10 @@ function SearchForm() {
               fontSize="18px"
               color="#A0A0A0"
             />
-            <div className="search-form__block-of-buttons"><button className="search-form__button-search" /></div>
-          </div>
+            <div className="search-form__block-of-buttons">
+              <button className="search-form__button-search link-hover" />
+            </div>
+          </form>
           <div className="search-form__line">
             <label className="search-form__slider-box">
               <input
