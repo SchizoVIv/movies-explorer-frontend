@@ -1,0 +1,130 @@
+.burger{
+  display: none;
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+  .burger{
+    display: block;
+    position: absolute;
+    right: 44px;
+    top: 27px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    margin: 0;
+    z-index: 3;
+    position: fixed;
+    transition: all 0.5s;
+  }
+  .burger__line{
+    position: absolute;
+    display: block;
+    width: 26px;
+    background-color: #000;
+    border: 1.5px solid #000;
+    transition: 0.4s ease-in-out all;
+    cursor: pointer;
+  }
+
+  .burger__line_nomber_1{
+    top: 0px;
+  }
+
+  .burger__line_nomber_2{
+    top: 10px;
+  }
+
+  .burger__line_nomber_3{
+    top: 20px;
+  }
+  .active .burger__line_nomber_1 {
+    opacity: 0;
+  }
+
+  .active .burger__line{
+    top: 11px;
+    right: -17px;
+    width: 20px;
+  }
+  .active .burger__line_nomber_2 {
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .active .burger__line_nomber_3 {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  .header__overlay_open {
+    right: 0;
+  }
+
+  .header__overlay_hidden {
+    display: none;
+  }
+
+}
+
+
+@media screen and (max-width: 500px) {
+  .burger{
+    display: block;
+    position: absolute;
+    right: 26px;
+    top: 30px;
+    width: 20px;
+    height: 22px;
+    cursor: pointer;
+    margin: 0;
+  }
+  .burger__line{
+    position: absolute;
+    display: block;
+    width: 22px;
+    background-color: #000;
+    border: 1.5px solid #000;
+    transition: 0.4s ease-in-out all;
+    cursor: pointer;
+  }
+
+  .burger__line_nomber_1{
+    top: -2px;
+  }
+
+  .burger__line_nomber_2{
+    top: 7px;
+  }
+
+  .burger__line_nomber_3{
+    top: 16px;
+  }
+  .active .burger__line_nomber_1{
+    opacity: 0;
+  }
+
+  .active .burger__line_nomber_2 {
+    transform: translateY(-50%) rotate(45deg);
+    top: 14px;
+  }
+
+  .active .burger__line_nomber_3 {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  .active .burger__line{
+    top: 0px;
+    right: -8px;
+    width: 20px;
+  }
+
+  .header__overlay_open {
+    right: 0;
+  }
+
+  .header__overlay_hidden {
+    display: none;
+  }
+
+}
