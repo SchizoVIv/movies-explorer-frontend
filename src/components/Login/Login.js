@@ -57,7 +57,6 @@ function Login(props) {
         password: passwordResult,
       });
     },
-    //зависимости
     [validValue, setValidErr]
   );
 

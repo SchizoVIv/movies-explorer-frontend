@@ -1,6 +1,6 @@
 export const MOVIES_URL = 'https://api.nomoreparties.co';
-// export const WEB_URL = 'https://api.filmexplorer.nomoredomainsicu.ru';
-export const WEB_URL = 'http://localhost:3001';
+export const WEB_URL = 'https://api.schizovi.diplom.nomoredomainsmonster.ru';
+// export const WEB_URL = 'http://localhost:3001';
 
 export const ROUTS = {
   mainPath: '/',

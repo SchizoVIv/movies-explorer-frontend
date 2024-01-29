@@ -1,6 +1,6 @@
 import Header from '../Header/Header';
 import './Profile.css';
-import { React, useState, useContext, useRef } from 'react';
+import { React, useState, useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useForm } from 'react-hook-form';
 import Preloader from '../Preloader/Preloader';
@@ -33,7 +33,6 @@ function Profile(props) {
   });
 
   const isDisabled = (!isDirty && !isValid) || props.isLoading;
-  // const isDisabled = (!isDirty && isValid) || props.isLoading;
 
   function onSubmit(data) {
     if (data.name !== user.currentUser.name || data.email !== user.currentUser.email) {
