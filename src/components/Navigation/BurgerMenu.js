@@ -2,24 +2,18 @@ import React from 'react';
 import './BurgerMenu.css';
 
 function BurgerMenu(props) {
-
-  function setMenu(e) {
-    e.preventDefault();
-    console.log('click')
-    props.setBurger(!props.burger);
-  }
-
   return (
     <>
+      <div className = {props.mobile ? ['header__overlay', 'header__wrapper_open'].join(' ') : ['']}>
+      </div>
       <div
-        className={props.burger ? ['header__overlay header__overlay_open'] : ['header__overlay header__overlay_hidden']}></div>
-      <div
-        className={props.burger ? ["burger active"] : ["burger"]}
+      className={props.mobile ? ["burger active"] : ["burger"]}
         id="burger"
-        onClick={setMenu}>
-        <span className="burger__line burger__line_nomber_1"></span>
-        <span className="burger__line burger__line_nomber_2"></span>
-        <span className="burger__line burger__line_nomber_3"></span>
+        onClick={props.onClick}
+      >
+          <span className="burger__line burger__line_nomber_1"></span>
+          <span className="burger__line burger__line_nomber_2"></span>
+          <span className="burger__line burger__line_nomber_3"></span>
       </div>
     </>
   );

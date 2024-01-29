@@ -1,26 +1,98 @@
-import "./MoviesCard.css"
+import './MoviesCard.css';
+import { React, useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function MoviesCard(props) {
-    return(
-      <li className="element">
+  const user = useContext(CurrentUserContext);
+  const location = useLocation();
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === '/movies') {
+      const isSavedCheck = props.savedMovieList.some(
+        i => i.movieId === props.movie.id && i.owner === user.currentUser._id
+      );
+      if (isSavedCheck) {
+        props.allMovies.forEach(element => setIsSaved(true));
+      }
+    }
+  }, [location.pathname]);
+
+  function getTime(duration) {
+    let hours = Math.trunc(duration / 60);
+    let minutes = duration % 60;
+    return `${hours ? hours + 'ч ' : ''}${minutes ? minutes + 'м' : ''}`;
+  }
+
+// __________________________________________________________ клик/сохранение
+  function handleClick() {
+    if (!isSaved) {
+      const movieToSave = props.savedMovieList.find(
+        el => (el.movie ? el.movie.movieId : el.movieId) === props.movie.id
+      );
+      props.onMovieClick(props.movie || movieToSave.movie, setIsSaved);
+    }
+
+    if (isSaved) {
+      const movieToDelete = props.savedMovieList.find(
+        el => (el.movie ? el.movie.movieId : el.movieId) === props.movie.id
+      );
+      props.onMovieDelete(
+        movieToDelete.movie ? movieToDelete.movie._id : movieToDelete._id,
+        setIsSaved
+      );
+    }
+  }
+
+// _________________________________________________________ клик/удаление
+  function handleDelete() {
+    props.onMovieDelete(props.movie._id);
+  }
+
+
+  const saveBtnClass = `element__button-favorite ${isSaved ? 'element__button-favorite_active' : ''}
+  ${location.pathname === '/saved-movies' ? 'element__button-delete' : ''}`;
+
+  return (
+    <div className="element">
+      <a
+        href={props.movie.trailerLink}
+        target="_blank"
+        className="element__link"
+        rel="noreferrer noopener"
+      >
         <img
           className="element__image"
-          src={props.card.image}
-          alt="Превью фильма"
+          alt={location.pathname === '/saved-movies' ? props.movie.nameRU : props.movie.image.name}
+          src={
+            location.pathname === '/saved-movies'
+              ? props.movie.image
+              : `https://api.nomoreparties.co/${props.movie.image.url}`
+          }
         />
-        <div className="element__box">
-          <div className="element__block-of-text">
-            <h2 className="element__title">{props.card.nameRU}</h2>
-            <p className="element__time">{props.card.duration}</p>
-          </div>
-          <button
-            className={props.class}
-            type="button"
-            aria-label="В избранное"
-          ></button>
+      </a>
+      <div className="element__box">
+        <div className="element__block-of-text">
+          <h2 className="element__title">
+            {props.movie.nameRU}
+          </h2>
+          <p className="element__time">
+            {getTime(props.movie.duration)}
+          </p>
         </div>
-      </li>
-    )
+        <button
+          value={{ isSaved }}
+          onClick={location.pathname === '/saved-movies' ? handleDelete : handleClick}
+          className={saveBtnClass}
+          aria-label="save"
+          type="button"
+          disabled={props.isLoading ? true : false}
+        ></button>
+        </div>
+    </div>
+  );
 }
 
 export default MoviesCard;
+
