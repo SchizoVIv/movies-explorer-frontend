@@ -1,6 +1,6 @@
-import "./AboutMe.css"
-import {Link} from "react-router-dom"
-import foto from "../../images/pic__COLOR_pic.jpg"
+import "./AboutMe.css";
+import {Link} from "react-router-dom";
+import foto from "../../images/picColorPic.jpg";
 
 function AboutMe() {
   return (

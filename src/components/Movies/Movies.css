@@ -1,7 +1,7 @@
 .movies {
   background-color: #FAFAFA;
   max-width: 1280px;
-  padding: 70px 70px 80px;
+  padding: 70px 50px 80px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -26,6 +26,11 @@
 
 .further__button:hover{
   background-color: #DDDEE3;
+}
+
+.further__button_hidden {
+  overflow: hidden;
+  visibility: hidden;
 }
 
 @media screen and (max-width: 989px) {
