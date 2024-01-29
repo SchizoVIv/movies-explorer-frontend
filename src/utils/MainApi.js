@@ -13,7 +13,6 @@ class MainApi {
         .then(err => {
           throw err;
         });
-      // return Promise.reject(`Ошибка: ${res.status}`);
     }
   }
 
@@ -93,10 +92,6 @@ class MainApi {
       headers: {
         "Content-Type": "application/json",
       },
-      // headers: {
-      //   authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      //   'Content-Type': 'application/json'
-      // },
       credentials: 'include',
       body: JSON.stringify({
         email: email,
@@ -122,21 +117,7 @@ class MainApi {
       },
     }).then(res => this._handleServerResponse(res));
   }
-
-  // logout() {
-  //   return fetch(`${this._url}/signout`, {
-  //     method: 'POST',
-  //     headers: {
-  //       authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  //       'Content-Type': 'application/json'
-  //     },
-  //     credentials: 'include'
-  //   }).then(res => {
-  //     console.log(res)
-  //     this._handleServerResponse(res)
-  //   });
-  // }
-
+  
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
