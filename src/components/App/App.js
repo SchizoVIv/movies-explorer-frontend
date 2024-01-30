@@ -193,13 +193,13 @@ function App() {
         setErrors(err.message);
         if (location.pathname === '/signin') {
           navigate('/signin', { replace: true });
-        } else if (location.pathname === '/signup') {
-          navigate('/signup', { replace: true });
-        } else if (location.pathname === '/movies' || '/saved-movies' || '/profile' || '/404') {
-          navigate('/404', { replace: true });
-        } else {
+        } else if (location.pathname === '/') {
           navigate('/', { replace: true });
-        }
+        }else if (location.pathname === '/signup') {
+          navigate('/signup', { replace: true });
+        } else if (location.pathname === '/movies' || '/saved-movies' || '/profile') {
+          navigate('/404', { replace: true });
+        } 
       })
       .finally(() => {
         setTimeout(() => {
