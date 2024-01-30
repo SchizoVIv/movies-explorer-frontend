@@ -20,7 +20,7 @@
 } */
 
 .prelosder {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,6 +28,7 @@
   height: 100%;
   overflow: auto;
   transition: all .5s;
+  overflow: hidden;
 }
 .prelosder_hidden {
   overflow: hidden;

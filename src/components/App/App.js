@@ -13,6 +13,7 @@ import MoviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ModalWindow from '../ModalWindow/ModalWindow';
 import {
   ERR_SERVER,
   ERR_VALID,
@@ -57,6 +58,12 @@ function App() {
   // ____________ error | info
   const [errors, setErrors] = useState(null);
   const [infoMessage, setInfoMessage] = useState(null);
+  const [info, setInfo] = useState({ text: "" });
+  const [modalOpen, setModalOpen] = useState(false);
+
+  function ChooseInfoModal (info) {
+    setInfo({ text: info.text });
+  }
 
   // _______________________________________________________________ размер окна
   useEffect(() => {
@@ -100,7 +107,7 @@ function App() {
   }, [windowSize, windowSizeResize]);
 
   // _______________________________________________________________ регистрация
-  function handleRegistration(formValue, setErrMessage, setInfo) {
+  function handleRegistration(formValue, setErrMessage, setInfo, setFocusName, setFocusEmail, setFocusPass) {
     const { email, password, name } = formValue;
     console.log( email, password, name )
 
@@ -108,17 +115,27 @@ function App() {
       setErrMessage(ERR_VALID);
       return;
     }
+    setModalOpen(true)
     setIsLoading(true);
     mainApi
       .registration({ email, password, name })
       .then(data => {
         setTimeout(() => {
           setInfo(data.message);
+          setFocusName(false);
+          setFocusEmail(false);
+          setFocusPass(false);
+          ChooseInfoModal({
+            text:'Вы успешно зарегистрировались'
+          })
         }, 1000);
         handleLogin({ email, password });
       })
       .catch(err => {
         setErrors(err.message);
+        ChooseInfoModal({
+          text:'Что-то пошло не так! Попробуйте еще раз!'
+        })
       })
       .finally(() => {
         setInfo(null);
@@ -129,7 +146,7 @@ function App() {
   }
 
   // _______________________________________________________________ авторизция
-  function handleLogin(formValue, setErrorMessage) {
+  function handleLogin(formValue, setErrorMessage, setFocusEmail, setFocusPass) {
     console.log(formValue)
     if (!formValue.email || !formValue.password) {
       setErrorMessage(ERR_VALID);
@@ -142,13 +159,21 @@ function App() {
       .then(data => {
         setTimeout(() => {
           setInfoMessage(data.message);
+          ChooseInfoModal({
+            text:'Авторизация прошла успешно!'
+          })
         }, 3000);
         setIsLoggedIn(true);
+        setFocusEmail(false);
+        setFocusPass(false);
 
-        navigate('/movies', { replace: true });
+        navigate('/movies');
       })
       .catch(err => {
         setErrors(err.message);
+        ChooseInfoModal({
+          text:'Что-то пошло не так!'
+        })
       })
       .finally(() => {
         setInfoMessage(null);
@@ -192,14 +217,14 @@ function App() {
         setIsLoggedIn(false);
         setErrors(err.message);
         if (location.pathname === '/signin') {
-          navigate('/signin', { replace: true });
+          navigate('/signin');
         } else if (location.pathname === '/') {
-          navigate('/', { replace: true });
+          navigate('/');
         }else if (location.pathname === '/signup') {
-          navigate('/signup', { replace: true });
+          navigate('/signup');
         } else if (location.pathname === '/movies' || '/saved-movies' || '/profile') {
-          navigate('/404', { replace: true });
-        } 
+          navigate('/404');
+        }
       })
       .finally(() => {
         setTimeout(() => {
@@ -222,6 +247,7 @@ function App() {
 
   // _______________________________________________________________ выход из профиля
   function signOut() {
+    setModalOpen(true);
     localStorage.clear();
     setCurrentUser('');
     setIsLoggedIn(false);
@@ -229,13 +255,17 @@ function App() {
     setSavedMovieList([]);
     setSearchQuery('');
     window.sessionStorage.removeItem('lastRoute');
-    navigate('/', { replace: true });
+    navigate('/');
+    ChooseInfoModal({
+      text:'Вы вышли'
+    })
   }
 
   // _______________________________________________________________ изменение профиля
   function handleUpdateUser(data, setInfo, setErr, setFocus) {
     const { name, email} = data;
     setIsLoading(true);
+    setModalOpen(true);
     mainApi
       .updateUserInfo({ name, email })
       .then(data => {
@@ -243,10 +273,18 @@ function App() {
         setErr(null);
         setInfo(data.message);
         setFocus(false)
+        setTimeout(() => {
+          ChooseInfoModal({
+            text:'Данные изменены'
+          })
+        }, 3000)
       })
       .catch(err => {
         setErrors(err.message);
         setErr(err.validation ? err.validation.body.message : '');
+        ChooseInfoModal({
+          text:'Что-то пошло не так! Попробуйте еще раз!'
+        })
       })
       .finally(() => {
         setErrors(null);
@@ -258,7 +296,6 @@ function App() {
   // _______________________________________________________________ сохранение фильма
   function handleSaveMovie(data, setIsSaved) {
     if (isLoggedIn) {
-      setIsLoading(true);
       if (isLoggedIn) {
         mainApi
           .saveMovie(data)
@@ -275,7 +312,6 @@ function App() {
               setErrors(null);
               setInfoMessage(null);
             }, 3000);
-            setIsLoading(false);
           });
       }
     }
@@ -283,7 +319,6 @@ function App() {
   // _______________________________________________________________ удаление фильма
   function handleMovieDelete(id, setIsSaved) {
     if (isLoggedIn) {
-      setIsLoading(true);
       mainApi
         .deleteSavedMovie(id)
         .then(movie => {
@@ -296,7 +331,6 @@ function App() {
           setErrors(err.statusCode);
         })
         .finally(() => {
-          setIsLoading(false);
           setTimeout(() => {
             setErrors(null);
             setInfoMessage(null);
@@ -336,7 +370,8 @@ function App() {
     if (isLoggedIn) {
       setMovieIsNotFound(true);
       setIsLoading(true);
-      MoviesApi.getMovieCardsFromServer()
+      MoviesApi
+        .getMovieCardsFromServer()
         .then(movies => {
           const movieSearchList = movies
             .filter(
@@ -383,6 +418,12 @@ function App() {
       setSavedMovieList(savedMovieList);
     }
   }, [location.pathname]);
+
+// _________________________________________________________________ модальное окно оповещение
+  const handleClose = () => {
+    console.log("close");
+    setModalOpen(false);
+  }
 
   return (
     <CurrentUserContext.Provider
@@ -493,6 +534,7 @@ function App() {
                 errors={errors}
                 infoMessage={infoMessage}
                 isLoading={isLoading}
+
               ></ProtectedRoute>
             }
           />
@@ -505,6 +547,12 @@ function App() {
             }
           />
         </Routes>
+        <ModalWindow
+          info={info}
+          errors={errors}
+          handleClose={handleClose}
+          modalOpen={modalOpen}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

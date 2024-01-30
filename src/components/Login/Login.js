@@ -18,6 +18,8 @@ function Login(props) {
   });
 
   const [info, setInfo] = useState(null);
+  const [focusEmail, setFocusEmail] = useState(false);
+  const [focusPass, setFocusPass] = useState(false);
   const [errorText, setErrorText] = useState(null);
   const [validErr, setValidErr] = useState({
     email: {
@@ -67,7 +69,7 @@ function Login(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.handleLogin(validValue, setErrorText, setInfo, setValidValue);
+    props.handleLogin(validValue, setErrorText, setFocusEmail, setFocusPass, setInfo, setValidValue);
     setValidValue({
       email: '',
       password: ''
@@ -82,6 +84,21 @@ function Login(props) {
 
   const isEmailValid = Object.values(validErr.email).some(Boolean);
   const isPasswordValid = Object.values(validErr.password).some(Boolean);
+
+  const choseTextEmail = (text) => {
+    if(focusEmail) {
+      return text
+    }
+  }
+  const choseTextPass = (text) => {
+    if(focusPass) {
+      return text
+    }
+  }
+
+  const test = () => {
+    console.log("test")
+  }
 
   return (
     <Form
@@ -104,15 +121,18 @@ function Login(props) {
             onChange={handleChange}
             value={validValue.email}
             disabled={props.isLoading ? true : false}
+            onClick={() => {
+              setFocusEmail(true);
+            }}
           ></input>
           {(validErr.email.required || validErr.password.required) && (
             <span className={classErr(validErr.email.required || validErr.password.required)}>
-              {VALID_INP_REQUIRED}
+              {choseTextEmail(VALID_INP_REQUIRED)}
             </span>
           )}
           {validErr.email.isEmail && (
             <span className={classErr(isEmailValid)}>
-              {VALID_EMAIL}
+              {choseTextEmail(VALID_EMAIL)}
             </span>
           )}
         </div>
@@ -126,20 +146,23 @@ function Login(props) {
             onChange={handleChange}
             value={validValue.password}
             disabled={props.isLoading ? true : false}
+            onClick={() => {
+              setFocusPass(true);
+            }}
           ></input>
           {validErr.password.required && (
             <span className={classErr(validErr.email.required || validErr.password.required)}>
-              {VALID_INP_REQUIRED}
+              {choseTextPass(VALID_INP_REQUIRED)}
             </span>
           )}
           {validErr.password.minLength && (
             <span className={classErr(isPasswordValid)}>
-              {VALID_MIN_LENGTH_8}
+              {choseTextPass(VALID_MIN_LENGTH_8)}
             </span>
           )}
           {validErr.password.containNumbers && (
             <span className={classErr(isPasswordValid)}>
-              {VALID_PASS}
+              {choseTextPass(VALID_PASS)}
             </span>
           )}
           <span className={classErr(errorText)}>
