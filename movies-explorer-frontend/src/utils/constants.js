@@ -2,19 +2,6 @@ export const MOVIES_URL = 'https://api.nomoreparties.co';
 export const WEB_URL = 'https://api.schizovi.diplom.nomoredomainsmonster.ru';
 // export const WEB_URL = 'http://localhost:3001';
 
-export const ROUTS = {
-  mainPath: '/',
-  moviesPath: '/movies',
-  savedMoviesPath: '/saved-movies',
-  loginPath: '/signin',
-  registerPath: '/signup',
-  logoutPath: '/signout',
-  profilePath: '/profile',
-  userPath: '/users/me',
-  anyOtherPath: '*',
-  beatfilm: 'beatfilm-movies',
-}
-
 export const GRID_ROW_2 = 2;
 export const GRID_ROW_3 = 3;
 export const GRID_ROW_4 = 4;
