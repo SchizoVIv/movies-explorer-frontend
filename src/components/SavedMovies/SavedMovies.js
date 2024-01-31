@@ -8,6 +8,7 @@ import Preloader from '../Preloader/Preloader';
 
 function SavedMovies(props) {
   return (
+    
     <>
       {props.isLoading ? <Preloader /> : ''}
        <Header/>

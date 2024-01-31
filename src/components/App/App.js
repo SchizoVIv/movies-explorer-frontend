@@ -21,13 +21,13 @@ import {
   GRID_CARD_12,
   GRID_CARD_15,
   GRID_CARD_16,
-  SCRIN_1279,
-  SCRIN_1278,
-  SCRIN_990,
-  SCRIN_989,
-  SCRIN_708,
-  SCRIN_707,
-  SCRIN_320
+  SCRIN_320,
+  SCRIN_1240,
+  SCRIN_1239,
+  SCRIN_910,
+  SCRIN_909,
+  SCRIN_769,
+  SCRIN_768
 } from '../../utils/constants';
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
   const lastIndex = currentPage * moviesPage;
   const firstIndex = lastIndex - moviesPage;
   const currentMoviePage = allMovies.slice(firstIndex, lastIndex);
-  const [screenWidth, setScreenWidth] = useState(SCRIN_1279);
+  const [screenWidth, setScreenWidth] = useState(SCRIN_1240);
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   const [windowSizeResize, setWindowSizeResize] = useState(false);
   // ____________ error | info
@@ -91,13 +91,13 @@ function App() {
     };
     window.addEventListener('resize', handleScrinResize);
 
-    if (screenWidth >= SCRIN_1279) {
+    if (screenWidth >= SCRIN_1240) {
       setMoviesPage(GRID_CARD_16);
-    } else if (screenWidth <= SCRIN_1278 && screenWidth >= SCRIN_990) {
+    } else if (screenWidth <= SCRIN_1239 && screenWidth >= SCRIN_910) {
       setMoviesPage(GRID_CARD_15);
-    } else if (screenWidth <= SCRIN_989 && screenWidth >= SCRIN_708) {
+    } else if (screenWidth <= SCRIN_909 && screenWidth >= SCRIN_769) {
       setMoviesPage(GRID_CARD_12);
-    } else if (screenWidth <= SCRIN_707 && screenWidth >= SCRIN_320) {
+    } else if (screenWidth <= SCRIN_768 && screenWidth >= SCRIN_320) {
       setMoviesPage(GRID_CARD_5);
     }
 
@@ -107,7 +107,7 @@ function App() {
   }, [windowSize, windowSizeResize]);
 
   // _______________________________________________________________ регистрация
-  function handleRegistration(formValue, setErrMessage, setInfo, setFocusName, setFocusEmail, setFocusPass) {
+  function handleRegistration(formValue, setErrMessage, setInfo, setFormValue, setFocusName, setFocusEmail, setFocusPass) {
     const { email, password, name } = formValue;
     console.log( email, password, name )
 
@@ -125,16 +125,21 @@ function App() {
           setFocusName(false);
           setFocusEmail(false);
           setFocusPass(false);
-          ChooseInfoModal({
-            text:'Вы успешно зарегистрировались'
-          })
+          setFormValue({
+            name: '',
+            email: '',
+            password: ''
+          });
         }, 1000);
+        ChooseInfoModal({
+          text:'Вы успешно зарегистрировались'
+        })
         handleLogin({ email, password });
       })
       .catch(err => {
         setErrors(err.message);
         ChooseInfoModal({
-          text:'Что-то пошло не так! Попробуйте еще раз!'
+          text:err.message
         })
       })
       .finally(() => {
@@ -146,22 +151,27 @@ function App() {
   }
 
   // _______________________________________________________________ авторизция
-  function handleLogin(formValue, setErrorMessage, setFocusEmail, setFocusPass) {
+  function handleLogin(formValue, setErrorMessage, setFocusEmail, setFocusPass, setValidValue) {
     console.log(formValue)
     if (!formValue.email || !formValue.password) {
       setErrorMessage(ERR_VALID);
       return;
     }
     const { email, password } = formValue;
+    setModalOpen(true)
     setIsLoading(true);
     mainApi
       .login( email, password )
       .then(data => {
+        ChooseInfoModal({
+          text:'Авторизация прошла успешно!'
+        })
         setTimeout(() => {
           setInfoMessage(data.message);
-          ChooseInfoModal({
-            text:'Авторизация прошла успешно!'
-          })
+          setValidValue({
+            email: '',
+            password: ''
+          });
         }, 3000);
         setIsLoggedIn(true);
         setFocusEmail(false);
@@ -172,7 +182,7 @@ function App() {
       .catch(err => {
         setErrors(err.message);
         ChooseInfoModal({
-          text:'Что-то пошло не так!'
+          text: err.message
         })
       })
       .finally(() => {
@@ -223,7 +233,7 @@ function App() {
         }else if (location.pathname === '/signup') {
           navigate('/signup');
         } else if (location.pathname === '/movies' || '/saved-movies' || '/profile') {
-          navigate('/404');
+          navigate('/');
         }
       })
       .finally(() => {
@@ -247,18 +257,50 @@ function App() {
 
   // _______________________________________________________________ выход из профиля
   function signOut() {
-    setModalOpen(true);
-    localStorage.clear();
-    setCurrentUser('');
-    setIsLoggedIn(false);
-    setMovies([]);
-    setSavedMovieList([]);
-    setSearchQuery('');
-    window.sessionStorage.removeItem('lastRoute');
-    navigate('/');
-    ChooseInfoModal({
-      text:'Вы вышли'
-    })
+    setIsLoading(true);
+    mainApi
+      .logout()
+      .then(res => {
+        console.log(res)
+        setModalOpen(true);
+        localStorage.removeItem('savedMoviesList')
+        localStorage.clear();
+        setCurrentUser('');
+        setIsLoggedIn(false);
+        setMovies([]);
+        setSavedMovieList([]);
+        setSearchQuery('');
+        window.sessionStorage.removeItem('lastRoute');
+        navigate('/');
+        ChooseInfoModal({
+          text:'Вы вышли'
+        })
+      })
+      .catch(err => {
+        ChooseInfoModal({
+          text:err.message
+        })
+        setErrors(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  function signOut2() {
+        setModalOpen(true);
+        localStorage.removeItem('savedMoviesList')
+        localStorage.clear();
+        setCurrentUser('');
+        setIsLoggedIn(false);
+        setMovies([]);
+        setSavedMovieList([]);
+        setSearchQuery('');
+        window.sessionStorage.removeItem('lastRoute');
+        navigate('/');
+        ChooseInfoModal({
+          text:'Вы вышли'
+        })
   }
 
   // _______________________________________________________________ изменение профиля
@@ -273,17 +315,15 @@ function App() {
         setErr(null);
         setInfo(data.message);
         setFocus(false)
-        setTimeout(() => {
-          ChooseInfoModal({
-            text:'Данные изменены'
-          })
-        }, 3000)
+        ChooseInfoModal({
+          text:'Данные изменены'
+        })
       })
       .catch(err => {
         setErrors(err.message);
         setErr(err.validation ? err.validation.body.message : '');
         ChooseInfoModal({
-          text:'Что-то пошло не так! Попробуйте еще раз!'
+          text:err.message
         })
       })
       .finally(() => {
@@ -303,8 +343,14 @@ function App() {
             setSavedMovieList([savedMovie, ...savedMovieList]);
             setInfoMessage(savedMovie.message);
             setIsSaved(true);
+
+            localStorage.setItem('savedMoviesList', JSON.stringify([savedMovie, ...savedMovieList]))
           })
           .catch(err => {
+            setModalOpen(true);
+            ChooseInfoModal({
+              text:err.message
+            })
             setErrors(data.message);
           })
           .finally(() => {
@@ -326,8 +372,14 @@ function App() {
           setSavedMovieList(savedMovies);
           setInfoMessage(movie.message);
           setIsSaved(false);
+
+          localStorage.setItem('savedMoviesList', JSON.stringify(savedMovies))
         })
         .catch(err => {
+          setModalOpen(true);
+            ChooseInfoModal({
+              text:err.message
+            })
           setErrors(err.statusCode);
         })
         .finally(() => {
@@ -347,6 +399,7 @@ function App() {
         .then(data => {
           const myFavourites = data.movies.filter(el => el.owner === currentUser._id);
           setSavedMovieList(myFavourites.reverse());
+          localStorage.setItem('savedMoviesList', JSON.stringify(myFavourites.reverse()))
           setTimeout(() => {
             setInfoMessage(data.message);
           }, 2000);
@@ -530,7 +583,7 @@ function App() {
                 element={Profile}
                 isLoggedIn={isLoggedIn}
                 onUpdateUser={handleUpdateUser}
-                onLogout={signOut}
+                onLogout={signOut2}
                 errors={errors}
                 infoMessage={infoMessage}
                 isLoading={isLoading}
@@ -542,14 +595,13 @@ function App() {
             path="/*"
             element={
               <Page404
-              isLoggedIn={isLoggedIn}
+                isLoggedIn={isLoggedIn}
               />
             }
           />
         </Routes>
         <ModalWindow
           info={info}
-          errors={errors}
           handleClose={handleClose}
           modalOpen={modalOpen}
         />

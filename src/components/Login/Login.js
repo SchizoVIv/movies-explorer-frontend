@@ -70,10 +70,6 @@ function Login(props) {
   const handleSubmit = e => {
     e.preventDefault();
     props.handleLogin(validValue, setErrorText, setFocusEmail, setFocusPass, setInfo, setValidValue);
-    setValidValue({
-      email: '',
-      password: ''
-    });
   };
 
   const classErr = (conditions) => {
@@ -125,8 +121,8 @@ function Login(props) {
               setFocusEmail(true);
             }}
           ></input>
-          {(validErr.email.required || validErr.password.required) && (
-            <span className={classErr(validErr.email.required || validErr.password.required)}>
+          {(validErr.email.required) && (
+            <span className={classErr(validErr.email.required)}>
               {choseTextEmail(VALID_INP_REQUIRED)}
             </span>
           )}
@@ -151,7 +147,7 @@ function Login(props) {
             }}
           ></input>
           {validErr.password.required && (
-            <span className={classErr(validErr.email.required || validErr.password.required)}>
+            <span className={classErr(validErr.password.required)}>
               {choseTextPass(VALID_INP_REQUIRED)}
             </span>
           )}

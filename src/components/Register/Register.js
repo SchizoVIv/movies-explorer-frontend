@@ -88,11 +88,6 @@ function Register(props) {
   const handleSubmit = e => {
     e.preventDefault();
     props.handleRegistration(formValue, setErrorText, setInfo, setFormValue, setFocusName, setFocusEmail, setFocusPass);
-    setFormValue({
-      name: '',
-      email: '',
-      password: ''
-    });
   };
 
   const classErr = (conditions) => {

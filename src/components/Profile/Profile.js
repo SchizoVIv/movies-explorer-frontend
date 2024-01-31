@@ -8,6 +8,8 @@ import { INFO_DATA_NO_UPDATE } from '../../utils/constants';
 
 function Profile(props) {
 
+  console.log(localStorage)
+
   const user = useContext(CurrentUserContext);
   const [focus, setFocus] = useState(false);
   const [info, setInfo] = useState(null);
@@ -45,6 +47,7 @@ function Profile(props) {
     }
   }
 
+  const classButton = isDisabled ? "profile__button-edit link-hover" : "profile__button-edit profile__button-edit_disabled"
   return (
     <>
       {props.isLoading ? <Preloader /> : ''}
@@ -122,7 +125,7 @@ function Profile(props) {
             <button
               type="submit"
               disabled={isDisabled}
-              className="profile__button-edit link-hover"
+              className={classButton}
             >
               {focus ? 'Сохранить' : 'Редактировать'}
             </button>

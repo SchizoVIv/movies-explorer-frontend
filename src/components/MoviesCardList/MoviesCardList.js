@@ -3,6 +3,9 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import { React } from 'react';
 import { useLocation } from 'react-router-dom';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
+import {
+  durationShort,
+} from '../../utils/constants';
 
 function MoviesCardList(props) {
 
@@ -45,6 +48,7 @@ function MoviesCardList(props) {
     );
   }
   if (location.pathname === '/saved-movies') {
+    console.log(props.savedMovieList)
     const render = () => {
       if (!props.savedQuery && !props.checkbox) {
         return props.savedMovieList.map((movie, key) => {
@@ -56,7 +60,7 @@ function MoviesCardList(props) {
         });
       } else if (!props.savedQuery && props.checkbox) {
         return props.savedMovieList
-          .filter(shortMovie => shortMovie.duration <= 40)
+          .filter(shortMovie => shortMovie.duration <= durationShort)
           .map((movie, key) => {
             return <MoviesCard
               movie={movie}
@@ -85,7 +89,7 @@ function MoviesCardList(props) {
               movie.nameRU.toLowerCase().includes(props.savedQuery.toLowerCase()) ||
               movie.nameEN.toLowerCase().includes(props.savedQuery.toLowerCase())
           )
-          .filter(shortMovie => shortMovie.duration <= 40)
+          .filter(shortMovie => shortMovie.duration <= durationShort)
           .map((movie, key) => {
             return <MoviesCard
               movie={movie}

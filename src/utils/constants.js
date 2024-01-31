@@ -21,16 +21,21 @@ export const GRID_ROW_4 = 4;
 export const GRID_ROW_5 = 5;
 export const GRID_CARD_12 = 12;
 export const GRID_CARD_5 = 5;
+export const GRID_CARD_8 = 8;
 export const GRID_CARD_16 = 16;
 export const GRID_CARD_15 = 15;
 
-export const SCRIN_1279 = 1279;
-export const SCRIN_1278 = 1278;
-export const SCRIN_990 = 990;
-export const SCRIN_989 = 989;
-export const SCRIN_708 = 708;
-export const SCRIN_707 = 707;
+export const SCRIN_1240 = 1240;
+export const SCRIN_1239 = 1239;
+export const SCRIN_910 = 910;
+export const SCRIN_909 = 909;
+export const SCRIN_769 = 769;
+export const SCRIN_768 = 768;
 export const SCRIN_320 = 320;
+
+export const durationShort = 40;
+export const minInHours = 60;
+
 
 export const VALID_MAX_LENGTH = 'Максимальная длина: 30 символов';
 export const VALID_MIN_LENGTH_2 = 'Минимальная длина: 2 символа';

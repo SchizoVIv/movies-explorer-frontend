@@ -19,11 +19,16 @@
 .page404__subtitle{
   margin: 5px 0 184px;
 }
-.page404__link{
+.page404__button{
   color: #3456F3;
   font-size: 14px;
   font-weight: 400;
+  max-width: 200px;
+  margin: 0 auto;
   text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

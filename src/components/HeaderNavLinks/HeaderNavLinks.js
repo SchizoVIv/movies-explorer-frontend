@@ -1,5 +1,5 @@
 import "./HeaderNavLinks.css"
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from 'react';
 import BurgerMenu from "../Navigation/BurgerMenu.js"
 import HeaderNavAccount from "../HeaderNavAccount/HeaderNavAccount.js"
@@ -28,12 +28,12 @@ function HeaderNavLinks() {
           }
         >
           <li className="header__item">
-            <Link
+            <NavLink
               to="/"
               className={headerLinkClass}
             >
               Главная
-            </Link>
+            </NavLink>
           </li>
           <li className="header__item">
             <NavLink to="/movies" className={headerLinkClass}>

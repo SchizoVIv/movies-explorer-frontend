@@ -1,5 +1,5 @@
 import "./AboutMe.css";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import foto from "../../images/picColorPic.jpg";
 
 function AboutMe() {
@@ -17,12 +17,11 @@ function AboutMe() {
             как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и
             ушёл с постоянной работы.
           </p>
-          <Link
+          <NavLink
             className="about-me__link link-line" to="https://github.com/SchizoVIv"
-            target="_blank"
           >
             Github
-          </Link>
+          </NavLink>
         </article>
         <img
           className="about-me__image"

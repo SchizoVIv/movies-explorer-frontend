@@ -54,6 +54,9 @@
   border: none;
   transition: all 0.5s;
 }
+.profile__button-edit_disabled {
+  color: #d4a0a0;
+}
 .profile__button-exit {
   font-size: 13px;
   font-weight: 500;

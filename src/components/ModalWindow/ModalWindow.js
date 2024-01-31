@@ -2,10 +2,6 @@ import "./ModalWindow.css";
 // import { React, useState, useContext } from 'react';
 
 function ModalWindow (props) {
-
-  console.log(props.modalOpen)
-  console.log(props.errors)
-  console.log(props.info)
   const classModal = props.modalOpen ? "modal" : "modal modal_close"
   return(
     <section className={classModal}>
