@@ -467,7 +467,6 @@ function App() {
 
 // _________________________________________________________________ модальное окно оповещение
   const handleClose = () => {
-    console.log("close");
     setModalOpen(false);
   }
 
