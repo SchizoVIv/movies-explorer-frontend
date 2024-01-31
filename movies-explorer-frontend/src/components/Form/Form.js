@@ -1,6 +1,6 @@
 import "./Form.css";
 import React from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 
 function Form(props) {
@@ -9,9 +9,9 @@ function Form(props) {
 
   return (
     <form onSubmit={props.onSubmit} id="form" className="form">
-      <Link className="link-logo" to="/" target="_blank">
+      <NavLink className="link-logo" to="/">
         <img src={logo} alt="Лого" title="лого"></img>
-      </Link>
+      </NavLink>
       <h2 className="form__title"> {props.title}</h2>
       {props.children}
       <button
@@ -24,9 +24,9 @@ function Form(props) {
       </button>
       <p className="form__action-text">
         {props.textAction}
-        <Link to={props.route} className="form__link-signin link-line">
+        <NavLink to={props.route} className="form__link-signin link-line">
           {props.textActionLink}
-        </Link>
+        </NavLink>
       </p>
     </form>
   );

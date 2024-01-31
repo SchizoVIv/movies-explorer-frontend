@@ -19,13 +19,10 @@ const auth = (req, res, next) => {
   }
 
   let payload;
-
-  // console.log('jwt');
-  // console.log(token);
+  
   try {
     payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev_secret');
   } catch (error) {
-    // console.log(payload);
     return next(new UnauthorizedError(ERR_TEXT_NO_AUTH));
   }
   req.user = payload;

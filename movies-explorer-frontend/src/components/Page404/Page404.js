@@ -1,7 +1,17 @@
 import "./Page404.css"
-import { Link } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 
-function Page404() {
+function Page404(props) {
+
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    if (props.isLoggedIn) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  };
   return(
     <main className="main">
       <section className="page404">
@@ -9,7 +19,7 @@ function Page404() {
         <h2 className="page404__title">404</h2>
         <p className="page404__subtitle">Страница не найдена</p>
         </div>
-        <Link className="page404__link" to="/">Назад</Link>
+        <button className="page404__button" onClick={goBack}>Назад</button>
       </section>
     </main>
   )

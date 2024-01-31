@@ -102,11 +102,11 @@ const login = async (req, res, next) => {
 
     const token = jwt.sign(payload, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev_secret', { expiresIn: '7d' });
 
-    res.cookie('jwt', token, {
-      maxAge: 3600000 * 24 * 7,
-      httpOnly: true,
-      sameSite: true,
-    });
+    // res.cookie('jwt', token, {
+    //   maxAge: 3600000 * 24 * 7,
+    //   httpOnly: true,
+    //   sameSite: true,
+    // });
 
     res.status(STATUS_OK).send({ token });
   } catch (err) {
@@ -115,7 +115,7 @@ const login = async (req, res, next) => {
 };
 
 const logout = async (req, res) => {
-  console.log(res.cookie);
+  
   if (res.cookie) {
     await res.clearCookie('jwt');
     res.status(STATUS_OK).send({ message: TEXT_OUT });

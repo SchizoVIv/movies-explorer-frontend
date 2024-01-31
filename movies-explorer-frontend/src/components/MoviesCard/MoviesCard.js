@@ -2,6 +2,9 @@ import './MoviesCard.css';
 import { React, useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import {
+  minInHours,
+} from '../../utils/constants';
 
 function MoviesCard(props) {
   const user = useContext(CurrentUserContext);
@@ -20,8 +23,8 @@ function MoviesCard(props) {
   }, [location.pathname]);
 
   function getTime(duration) {
-    let hours = Math.trunc(duration / 60);
-    let minutes = duration % 60;
+    let hours = Math.trunc(duration / minInHours);
+    let minutes = duration % minInHours;
     return `${hours ? hours + 'ч ' : ''}${minutes ? minutes + 'м' : ''}`;
   }
 
@@ -43,6 +46,7 @@ function MoviesCard(props) {
         setIsSaved
       );
     }
+    console.log(JSON.parse(localStorage.getItem('savedMoviesList')))
   }
 
 // _________________________________________________________ клик/удаление
@@ -58,7 +62,6 @@ function MoviesCard(props) {
     <div className="element">
       <a
         href={props.movie.trailerLink}
-        target="_blank"
         className="element__link"
         rel="noreferrer noopener"
       >

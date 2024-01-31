@@ -28,7 +28,7 @@ const getMovies = async (req, res, next) => {
 };
 
 const addMovie = (req, res, next) => {
-  console.log(req.body)
+  
   const {
     country,
     director,

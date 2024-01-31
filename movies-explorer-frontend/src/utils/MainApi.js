@@ -117,7 +117,7 @@ class MainApi {
       },
     }).then(res => this._handleServerResponse(res));
   }
-  
+
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
@@ -129,6 +129,13 @@ class MainApi {
     })
       .then(res => {
         return this._handleServerResponse(res)});
+  }
+
+  logout() {
+    return fetch(`${this._url}/signout`, {
+      method: 'POST',
+      credentials: 'include',
+    }).then(res => this._handleServerResponse(res));
   }
 
   updateUserInfo({ name, email }) {

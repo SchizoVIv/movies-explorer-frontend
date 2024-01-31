@@ -22,6 +22,9 @@ function Register(props) {
   });
 
   const [info, setInfo] = useState(null);
+  const [focusName, setFocusName] = useState(false);
+  const [focusEmail, setFocusEmail] = useState(false);
+  const [focusPass, setFocusPass] = useState(false);
   const [errorText, setErrorText] = useState(null);
   const [validValue, setValidValue] = useState({
     name: {
@@ -84,18 +87,29 @@ function Register(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.handleRegistration(formValue, setErrorText, setInfo, setFormValue);
-    setFormValue({
-      name: '',
-      email: '',
-      password: ''
-    });
+    props.handleRegistration(formValue, setErrorText, setInfo, setFormValue, setFocusName, setFocusEmail, setFocusPass);
   };
 
   const classErr = (conditions) => {
     return (
       conditions ? 'form__error form__error_active' : 'form__error'
     )
+  }
+
+  const choseTextName = (text) => {
+    if(focusName) {
+      return text
+    }
+  }
+  const choseTextEmail = (text) => {
+    if(focusEmail) {
+      return text
+    }
+  }
+  const choseTextPass = (text) => {
+    if(focusPass) {
+      return text
+    }
   }
 
   const isNameValid = Object.values(validValue.name).some(Boolean);
@@ -121,31 +135,34 @@ function Register(props) {
             type="text"
             className='form__input'
             onChange={handleChange}
+            onClick={() => {
+              setFocusName(true);
+            }}
             value={formValue.name}
             disabled={props.isLoading ? true : false}
           ></input>
 
           {validValue.name.required && (
             <span className={classErr(validValue.email.required || validValue.name.required || validValue.password.required)}>
-              {VALID_INP_REQUIRED}
+              {choseTextName(VALID_INP_REQUIRED)}
             </span>
           )}
 
           {validValue.name.minLength && (
             <span className={classErr(isNameValid)}>
-              {VALID_MIN_LENGTH_2}
+              {choseTextName(VALID_MIN_LENGTH_2)}
             </span>
           )}
 
           {validValue.name.maxLength && (
             <span className={classErr(isNameValid)}>
-              {VALID_MAX_LENGTH}
+              {choseTextName(VALID_MAX_LENGTH)}
             </span>
           )}
 
           {validValue.name.isName && (
             <span className={classErr(isNameValid)}>
-              {VALID_LENG}
+              {choseTextName(VALID_LENG)}
             </span>
           )}
         </div>
@@ -158,17 +175,20 @@ function Register(props) {
             type="email"
             className="form__input"
             onChange={handleChange}
+            onClick={() => {
+              setFocusEmail(true);
+            }}
             value={formValue.email}
             disabled={props.isLoading ? true : false}
           ></input>
           {validValue.email.required && (
             <span className={classErr(validValue.email.required || validValue.name.required || validValue.password.required)}>
-              {VALID_INP_REQUIRED}
+              {choseTextEmail(VALID_INP_REQUIRED)}
             </span>
           )}
           {validValue.email.isEmail && (
             <span className={classErr(isEmailValid)}>
-              {VALID_EMAIL}
+              {choseTextEmail(VALID_EMAIL)}
             </span>
           )}
         </div>
@@ -180,23 +200,26 @@ function Register(props) {
             type="password"
             className="form__input form__input_active"
             onChange={handleChange}
+            onClick={() => {
+              setFocusPass(true);
+            }}
             value={formValue.password}
             disabled={props.isLoading ? true : false}
           ></input>
 
           {validValue.password.required && (
             <span className={classErr(validValue.email.required || validValue.name.required || validValue.password.required)}>
-              {VALID_INP_REQUIRED}
+              {choseTextPass(VALID_INP_REQUIRED)}
             </span>
           )}
           {validValue.password.minLength && (
             <span className={classErr(isPasswordValid)}>
-              {VALID_MIN_LENGTH_8}
+              {choseTextPass(VALID_MIN_LENGTH_8)}
             </span>
           )}
           {validValue.password.containNumbers && (
             <span className={classErr(isPasswordValid)}>
-              {VALID_PASS}
+              {choseTextPass(VALID_PASS)}
             </span>
           )}
           <span className={classErr(errorText)}>

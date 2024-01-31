@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './Footer.css';
 
 function Footer() {
@@ -9,21 +9,19 @@ function Footer() {
           <p className="footer__age">© 2020</p>
           <ul className="footer__list">
             <li className="footer__item">
-              <Link
+              <NavLink
                 className="footer__item-link link-line"
                 to="https://practicum.yandex.ru/"
-                target="_blank"
               >
                 Яндекс.Практикум
-              </Link>
+              </NavLink>
             </li>
             <li className="footer__item">
-              <Link
+              <NavLink
                 className="footer__item-link link-line" to="https://github.com/"
-                target="_blank"
               >
                 Github
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
