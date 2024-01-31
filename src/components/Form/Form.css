@@ -5,6 +5,7 @@
   margin: 0 auto;
   padding: 70px 0;
   width: 100%;
+  box-sizing: border-box;
 }
 .link-logo{
   max-height: 38px;
