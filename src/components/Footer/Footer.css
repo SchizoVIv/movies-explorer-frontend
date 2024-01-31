@@ -3,6 +3,10 @@
   max-width: 1140px;
   padding: 0 70px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 .footer__title {
   color: #A0A0A0;

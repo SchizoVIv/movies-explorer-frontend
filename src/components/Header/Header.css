@@ -4,6 +4,10 @@
   background-color: #DDDEE3;
   display: flex;
   justify-content: center;
+  width: 100%;
+
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 .header__conteiner {
   max-width: 1140px;

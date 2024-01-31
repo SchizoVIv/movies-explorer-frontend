@@ -68,37 +68,39 @@ function Movies(props) {
   }, [props.windowSize, localStorage.getItem('query')]);
 
   return (
-    <main className="main">
-      {props.isLoading ? <Preloader /> : ''}
-      <Header />
-      <section className="movies">
-        <SearchForm
-          setMovies={props.setMovies}
-          setSavedMovieList={props.setSavedMovieList}
-          handleSearchQuery={props.handleSearchQuery}
-          searchQuery={props.searchQuery}
-          setSearchQuery={props.setSearchQuery}
-          isChecked={props.isChecked}
-          setIsChecked={props.setIsChecked}
-          errors={props.errors}
-          infoMessage={props.infoMessage}
-          isLoading={props.isLoading}
-        />
-        <MoviesCardList
-          loadMore={loadMore}
-          onMovieClick={props.onMovieClick}
-          onMovieDelete={props.onMovieDelete}
-          allMovies={props.allMovies}
-          movieIsNotFound={props.movieIsNotFound}
-          currentMoviePage={props.currentMoviePage}
-          readLess={props.readLess}
-          savedMovieList={props.savedMovieList}
-          setErrors={props.setErrors}
-          isLoading={props.isLoading}
-        />
-      </section>
+    <>
+      <main className="main">
+        {props.isLoading ? <Preloader /> : ''}
+        <Header />
+        <section className="movies">
+          <SearchForm
+            setMovies={props.setMovies}
+            setSavedMovieList={props.setSavedMovieList}
+            handleSearchQuery={props.handleSearchQuery}
+            searchQuery={props.searchQuery}
+            setSearchQuery={props.setSearchQuery}
+            isChecked={props.isChecked}
+            setIsChecked={props.setIsChecked}
+            errors={props.errors}
+            infoMessage={props.infoMessage}
+            isLoading={props.isLoading}
+          />
+          <MoviesCardList
+            loadMore={loadMore}
+            onMovieClick={props.onMovieClick}
+            onMovieDelete={props.onMovieDelete}
+            allMovies={props.allMovies}
+            movieIsNotFound={props.movieIsNotFound}
+            currentMoviePage={props.currentMoviePage}
+            readLess={props.readLess}
+            savedMovieList={props.savedMovieList}
+            setErrors={props.setErrors}
+            isLoading={props.isLoading}
+          />
+        </section>
+      </main>
       <Footer/>
-    </main>
+    </>
   );
 }
 
