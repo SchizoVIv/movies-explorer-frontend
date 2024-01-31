@@ -8,8 +8,6 @@ import { INFO_DATA_NO_UPDATE } from '../../utils/constants';
 
 function Profile(props) {
 
-  console.log(localStorage)
-
   const user = useContext(CurrentUserContext);
   const [focus, setFocus] = useState(false);
   const [info, setInfo] = useState(null);
@@ -129,7 +127,8 @@ function Profile(props) {
             >
               {focus ? 'Сохранить' : 'Редактировать'}
             </button>
-            <button onClick={props.onLogout} className="profile__button-exit link-hover">
+            <button onClick={props.onLogout} className="profile__button-exit link-hover"
+            type="button">
               Выйти из аккаунта
             </button>
           </div>

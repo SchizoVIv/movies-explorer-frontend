@@ -13,9 +13,6 @@ function MoviesCard(props) {
 
   useEffect(() => {
     if (location.pathname === '/movies') {
-      console.log('local')
-      console.log(JSON.parse(localStorage.getItem('savedMoviesList')))
-      console.log(JSON.parse(localStorage.getItem('savedMoviesList')))
       const isSavedCheck = props.savedMovieList.some(
         i => i.movieId === props.movie.id && i.owner === user.currentUser._id
       );
@@ -49,6 +46,7 @@ function MoviesCard(props) {
         setIsSaved
       );
     }
+    console.log(JSON.parse(localStorage.getItem('savedMoviesList')))
   }
 
 // _________________________________________________________ клик/удаление

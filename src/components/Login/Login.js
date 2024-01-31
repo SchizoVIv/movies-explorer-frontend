@@ -92,10 +92,6 @@ function Login(props) {
     }
   }
 
-  const test = () => {
-    console.log("test")
-  }
-
   return (
     <Form
       title='Рады видеть!'

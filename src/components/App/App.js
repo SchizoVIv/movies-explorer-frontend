@@ -27,7 +27,8 @@ import {
   SCRIN_910,
   SCRIN_909,
   SCRIN_769,
-  SCRIN_768
+  SCRIN_768,
+  durationShort
 } from '../../utils/constants';
 
 function App() {
@@ -167,11 +168,11 @@ function App() {
           text:'Авторизация прошла успешно!'
         })
         setTimeout(() => {
-          setInfoMessage(data.message);
           setValidValue({
             email: '',
             password: ''
           });
+          setInfoMessage(data.message);
         }, 3000);
         setIsLoggedIn(true);
         setFocusEmail(false);
@@ -257,50 +258,24 @@ function App() {
 
   // _______________________________________________________________ выход из профиля
   function signOut() {
+    setModalOpen(true)
     setIsLoading(true);
-    mainApi
-      .logout()
-      .then(res => {
-        console.log(res)
-        setModalOpen(true);
-        localStorage.removeItem('savedMoviesList')
-        localStorage.clear();
-        setCurrentUser('');
-        setIsLoggedIn(false);
-        setMovies([]);
-        setSavedMovieList([]);
-        setSearchQuery('');
-        window.sessionStorage.removeItem('lastRoute');
-        navigate('/');
-        ChooseInfoModal({
-          text:'Вы вышли'
-        })
-      })
-      .catch(err => {
-        ChooseInfoModal({
-          text:err.message
-        })
-        setErrors(err.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
-
-  function signOut2() {
-        setModalOpen(true);
-        localStorage.removeItem('savedMoviesList')
-        localStorage.clear();
-        setCurrentUser('');
-        setIsLoggedIn(false);
-        setMovies([]);
-        setSavedMovieList([]);
-        setSearchQuery('');
-        window.sessionStorage.removeItem('lastRoute');
-        navigate('/');
-        ChooseInfoModal({
-          text:'Вы вышли'
-        })
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('savedMoviesList')
+    localStorage.clear();
+    setCurrentUser('');
+    setIsLoggedIn(false);
+    setMovies([]);
+    setSavedMovieList([]);
+    setSearchQuery('');
+    window.sessionStorage.removeItem('lastRoute');
+    navigate('/');
+    ChooseInfoModal({
+      text:'Вы вышли'
+    })
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
   }
 
   // _______________________________________________________________ изменение профиля
@@ -375,11 +350,7 @@ function App() {
 
           localStorage.setItem('savedMoviesList', JSON.stringify(savedMovies))
         })
-        .catch(err => {
-          setModalOpen(true);
-            ChooseInfoModal({
-              text:err.message
-            })
+        .MoviesApicatch(err => {
           setErrors(err.statusCode);
         })
         .finally(() => {
@@ -423,31 +394,53 @@ function App() {
     if (isLoggedIn) {
       setMovieIsNotFound(true);
       setIsLoading(true);
-      MoviesApi
-        .getMovieCardsFromServer()
-        .then(movies => {
-          const movieSearchList = movies
-            .filter(
-              item =>
-                item.nameRU.toLowerCase().includes(query.toLowerCase()) ||
-                item.nameEN.toLowerCase().includes(query.toLowerCase())
-            )
-            .filter(shortMovie => (isChecked ? shortMovie.duration <= 40 : shortMovie.duration));
-          movieSearchList.length === 0 ? setMovieIsNotFound(true) : setMovieIsNotFound(false);
-          setMovies(movieSearchList);
-          localStorage.setItem('allMovies', JSON.stringify(allMovies));
-          localStorage.setItem('movieSearchList', JSON.stringify(movieSearchList));
-          localStorage.setItem('isChecked', JSON.stringify(isChecked));
-          localStorage.setItem('query', JSON.stringify(query));
-          setSearchQuery(query);
-        })
-        .catch(err => {
-          setErrors(ERR_SERVER);
-        })
-        .finally(() => {
-          setErrors(null);
+      if(!localStorage.getItem('allBeatMovies')){
+        MoviesApi
+          .getMovieCardsFromServer()
+          .then(movies => {
+            const movieSearchList = movies
+              .filter(
+                item =>
+                  item.nameRU.toLowerCase().includes(query.toLowerCase()) ||
+                  item.nameEN.toLowerCase().includes(query.toLowerCase())
+              )
+              .filter(shortMovie => (isChecked ? shortMovie.duration <= durationShort : shortMovie.duration));
+            movieSearchList.length === 0 ? setMovieIsNotFound(true) : setMovieIsNotFound(false);
+            setMovies(movieSearchList);
+            localStorage.setItem('allMovies', JSON.stringify(allMovies));
+            localStorage.setItem('allBeatMovies', JSON.stringify(movies));
+            localStorage.setItem('movieSearchList', JSON.stringify(movieSearchList));
+            localStorage.setItem('isChecked', JSON.stringify(isChecked));
+            localStorage.setItem('query', JSON.stringify(query));
+            setSearchQuery(query);
+          })
+          .catch(err => {
+            setErrors(ERR_SERVER);
+          })
+          .finally(() => {
+            setErrors(null);
+            setIsLoading(false);
+          });
+      } else {
+        const movieSearchList = JSON.parse(localStorage.getItem('allBeatMovies'))
+          .filter(
+            item =>
+              item.nameRU.toLowerCase().includes(query.toLowerCase()) ||
+              item.nameEN.toLowerCase().includes(query.toLowerCase())
+          )
+          .filter(shortMovie => (isChecked ? shortMovie.duration <= durationShort : shortMovie.duration));
+
+        movieSearchList.length === 0 ? setMovieIsNotFound(true) : setMovieIsNotFound(false);
+        setMovies(movieSearchList);
+        localStorage.setItem('allMovies', JSON.stringify(allMovies));
+        localStorage.setItem('movieSearchList', JSON.stringify(movieSearchList));
+        localStorage.setItem('isChecked', JSON.stringify(isChecked));
+        localStorage.setItem('query', JSON.stringify(query));
+        setSearchQuery(query);
+        setTimeout(() => {
           setIsLoading(false);
-        });
+        }, 1000)
+      }
     } else {
       return;
     }
@@ -583,7 +576,7 @@ function App() {
                 element={Profile}
                 isLoggedIn={isLoggedIn}
                 onUpdateUser={handleUpdateUser}
-                onLogout={signOut2}
+                onLogout={signOut}
                 errors={errors}
                 infoMessage={infoMessage}
                 isLoading={isLoading}

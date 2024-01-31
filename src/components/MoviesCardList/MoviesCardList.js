@@ -48,7 +48,6 @@ function MoviesCardList(props) {
     );
   }
   if (location.pathname === '/saved-movies') {
-    console.log(props.savedMovieList)
     const render = () => {
       if (!props.savedQuery && !props.checkbox) {
         return props.savedMovieList.map((movie, key) => {
