@@ -32,20 +32,36 @@ function Profile(props) {
     }
   });
 
-  const isDisabled = focus === false || (!isDirty && !isValid) || props.isLoading;
+  const isDisabled = !focus || (!isDirty && !isValid) || props.isLoading;
+
+  // function onSubmit(data) {
+  //   if (data.name !== user.currentUser.name || data.email !== user.currentUser.email) {
+  //     props.onUpdateUser(data, setInfo, setErr, setFocus);
+  //   } else {
+  //     setInfo(INFO_DATA_NO_UPDATE);
+  //     setTimeout(() => {
+  //       setInfo(null);
+  //     }, 3000);
+  //   }
+  // }
 
   function onSubmit(data) {
-    if (data.name !== user.currentUser.name || data.email !== user.currentUser.email) {
-      props.onUpdateUser(data, setInfo, setErr, setFocus);
+    if(data.name === user.currentUser.name && data.email === user.currentUser.email) {
+      setFocus(false)
     } else {
-      setInfo(INFO_DATA_NO_UPDATE);
-      setTimeout(() => {
-        setInfo(null);
-      }, 3000);
+      if (data.name !== user.currentUser.name || data.email !== user.currentUser.email) {
+        props.onUpdateUser(data, setInfo, setErr, setFocus);
+      } else {
+        setInfo(INFO_DATA_NO_UPDATE);
+        setTimeout(() => {
+          setInfo(null);
+        }, 3000);
+      }
     }
   }
 
-  const classButton = isDisabled ? "profile__button-edit link-hover" : "profile__button-edit profile__button-edit_disabled"
+  const classButton = !isValid || !focus || (!isDirty && !isValid) || props.isLoading ? "profile__button-edit profile__button-edit_disabled" : "profile__button-edit link-hover"
+
   return (
     <>
       {props.isLoading ? <Preloader /> : ''}
@@ -125,7 +141,7 @@ function Profile(props) {
               disabled={isDisabled}
               className={classButton}
             >
-              {focus ? 'Сохранить' : 'Редактировать'}
+              {!isValid && !isDirty ? 'Сохранить' : 'Редактировать'}
             </button>
             <button onClick={props.onLogout} className="profile__button-exit link-hover"
             type="button">
