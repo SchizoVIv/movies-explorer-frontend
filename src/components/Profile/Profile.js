@@ -32,18 +32,7 @@ function Profile(props) {
     }
   });
 
-  const isDisabled = !focus || (!isDirty && !isValid) || props.isLoading;
-
-  // function onSubmit(data) {
-  //   if (data.name !== user.currentUser.name || data.email !== user.currentUser.email) {
-  //     props.onUpdateUser(data, setInfo, setErr, setFocus);
-  //   } else {
-  //     setInfo(INFO_DATA_NO_UPDATE);
-  //     setTimeout(() => {
-  //       setInfo(null);
-  //     }, 3000);
-  //   }
-  // }
+  const isDisabled = !isDirty || !focus || (!isDirty && !isValid) || props.isLoading;
 
   function onSubmit(data) {
     if(data.name === user.currentUser.name && data.email === user.currentUser.email) {
@@ -60,7 +49,7 @@ function Profile(props) {
     }
   }
 
-  const classButton = !isValid || !focus || (!isDirty && !isValid) || props.isLoading ? "profile__button-edit profile__button-edit_disabled" : "profile__button-edit link-hover"
+  const classButton = (!isDirty && !isValid) || !isDirty || !isValid || !focus || props.isLoading ? "profile__button-edit profile__button-edit_disabled" : "profile__button-edit link-hover"
 
   return (
     <>
@@ -141,7 +130,7 @@ function Profile(props) {
               disabled={isDisabled}
               className={classButton}
             >
-              {!isValid && !isDirty ? 'Сохранить' : 'Редактировать'}
+              {isValid && isDirty && focus ? 'Сохранить' : 'Редактировать'}
             </button>
             <button onClick={props.onLogout} className="profile__button-exit link-hover"
             type="button">
