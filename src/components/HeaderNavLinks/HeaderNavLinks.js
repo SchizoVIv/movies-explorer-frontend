@@ -42,7 +42,7 @@ function HeaderNavLinks() {
           </li>
           <li className="header__item">
             <NavLink to="/saved-movies" className={headerLinkClass}>
-              Сохраненные фильмы
+              Сохранённые фильмы
             </NavLink>
           </li>
           <li className="header__item">
