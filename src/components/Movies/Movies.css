@@ -5,6 +5,7 @@
   padding: 70px 50px 80px;
   margin: 0 auto;
   box-sizing: border-box;
+  flex-grow: 1;
 }
 
 .further {
