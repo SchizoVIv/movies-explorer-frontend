@@ -12,20 +12,13 @@ function HeaderNavLinks() {
     setMobile(!mobile);
   }
 
-  // let headerLinkClass = 'header__link link-line';
-  // if (mobile) {
-  //   headerLinkClass = 'header__link header__link_active';
-  // } else {
-  //   headerLinkClass += ' header__link_black ';
-  // }
-
   let headerLinkClass = 'header__link link-line';
   if (mobile) {
     headerLinkClass += ' header__link_active';
   } else if (!mobile && window.location.pathname === !'/saved-movies') {
     headerLinkClass += ' header__link_black';
   } else if (!mobile && window.location.pathname === '/saved-movies') {
-    headerLinkClass += ' header__link_black ';
+    headerLinkClass += ' header__link_black';
   }
 
     return (
