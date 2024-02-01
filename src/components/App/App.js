@@ -169,19 +169,19 @@ function App() {
         })
         setTimeout(() => {
           setInfoMessage(data.message);
-          // if(formValue) {
-          //   setValidValue({
-          //     email: '',
-          //     password: ''
-          //   });
-          // }
         }, 3000);
+        if(focusEmail) {
+          setValidValue({
+            email: '',
+            password: ''
+          });
+        }
         setIsLoggedIn(true);
 
         navigate('/movies');
       })
       .catch(err => {
-        setErrors(err.message);
+        // setErrors(err.message);
         ChooseInfoModal({
           text: err.message
         })
