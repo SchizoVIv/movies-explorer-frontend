@@ -25,7 +25,7 @@ export const GRID_CARD_12 = 12;
 
 export const SCRIN_TAB_MAX = 1237;
 export const SCRIN_PL_MAX = 910;
-export const SCRIN_PL_MIN = 765;
+export const SCRIN_PL_MIN = 481;
 export const SCRIN_MOB_MIN = 320;
 
 export const durationShort = 40;
