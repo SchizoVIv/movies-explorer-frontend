@@ -18,7 +18,7 @@ import {
   ERR_SERVER,
   ERR_VALID,
   GRID_CARD_5,
-  GRID_CARD_12,
+  GRID_CARD_8,
   GRID_CARD_15,
   GRID_CARD_16,
   SCRIN_320,
@@ -26,8 +26,8 @@ import {
   SCRIN_1239,
   SCRIN_910,
   SCRIN_909,
-  SCRIN_769,
-  SCRIN_768,
+  SCRIN_481,
+  SCRIN_480,
   durationShort
 } from '../../utils/constants';
 
@@ -96,9 +96,9 @@ function App() {
       setMoviesPage(GRID_CARD_16);
     } else if (screenWidth <= SCRIN_1239 && screenWidth >= SCRIN_910) {
       setMoviesPage(GRID_CARD_15);
-    } else if (screenWidth <= SCRIN_909 && screenWidth >= SCRIN_769) {
-      setMoviesPage(GRID_CARD_12);
-    } else if (screenWidth <= SCRIN_768 && screenWidth >= SCRIN_320) {
+    } else if (screenWidth <= SCRIN_909 && screenWidth >= SCRIN_481) {
+      setMoviesPage(GRID_CARD_8);
+    } else if (screenWidth <= SCRIN_480 && screenWidth >= SCRIN_320) {
       setMoviesPage(GRID_CARD_5);
     }
 
