@@ -18,7 +18,7 @@ function HeaderNavLinks() {
   } else if (!mobile && window.location.pathname === !'/saved-movies') {
     headerLinkClass += ' header__link_black';
   } else if (!mobile && window.location.pathname === '/saved-movies') {
-    headerLinkClass += ' header__link_black';
+    headerLinkClass += ' ';
   }
 
     return (

@@ -29,10 +29,6 @@
   position: relative;
   color: #000000;
 }
-.active {
-  font-weight: 500;
-  color: blue;
-}
 .link-line:hover {
   color: #000000;
 }
@@ -61,7 +57,7 @@
 }
 
 .header__link_black {
-  color: black;
+  color:blue;
   font-weight: 400;
 }
 
@@ -166,6 +162,16 @@
   .header__link_hidden {
     display: none;
     transition: all 0.5s;
+  }
+
+  .header__link_black:nth-child(3) {
+    text-align: center;
+  }
+  .header__link_black:nth-child(2) {
+    text-align: center;
+  }
+  .header__wrapper_open {
+    right: 0;
   }
 }
 
