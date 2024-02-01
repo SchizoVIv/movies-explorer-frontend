@@ -21,15 +21,12 @@ export const GRID_ROW_4 = 4;
 export const GRID_CARD_5 = 5;
 export const GRID_CARD_8 = 8;
 export const GRID_CARD_16 = 16;
-export const GRID_CARD_15 = 15;
+export const GRID_CARD_12 = 12;
 
-export const SCRIN_1240 = 1240;
-export const SCRIN_1239 = 1239;
-export const SCRIN_910 = 910;
-export const SCRIN_909 = 909;
-export const SCRIN_320 = 320;
-export const SCRIN_481 = 481;
-export const SCRIN_480 = 480;
+export const SCRIN_TAB_MAX = 1237;
+export const SCRIN_PL_MAX = 910;
+export const SCRIN_PL_MIN = 765;
+export const SCRIN_MOB_MIN = 320;
 
 export const durationShort = 40;
 export const minInHours = 60;

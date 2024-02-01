@@ -19,15 +19,11 @@ import {
   ERR_VALID,
   GRID_CARD_5,
   GRID_CARD_8,
-  GRID_CARD_15,
+  GRID_CARD_12,
   GRID_CARD_16,
-  SCRIN_320,
-  SCRIN_1240,
-  SCRIN_1239,
-  SCRIN_910,
-  SCRIN_909,
-  SCRIN_481,
-  SCRIN_480,
+  SCRIN_TAB_MAX,
+  SCRIN_PL_MAX,
+  SCRIN_PL_MIN,
   durationShort
 } from '../../utils/constants';
 
@@ -53,7 +49,7 @@ function App() {
   const lastIndex = currentPage * moviesPage;
   const firstIndex = lastIndex - moviesPage;
   const currentMoviePage = allMovies.slice(firstIndex, lastIndex);
-  const [screenWidth, setScreenWidth] = useState(SCRIN_1240);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   const [windowSizeResize, setWindowSizeResize] = useState(false);
   // ____________ error | info
@@ -90,22 +86,26 @@ function App() {
       }]);
       setWindowSizeResize(true);
     };
-    window.addEventListener('resize', handleScrinResize);
 
-    if (screenWidth >= SCRIN_1240) {
+    window.addEventListener('resize', handleScrinResize);
+    console.log("app")
+    console.log(windowSize[0].width)
+    console.log(moviesPage)
+    console.log(currentMoviePage)
+    if (windowSize[0].width >= SCRIN_TAB_MAX) {
       setMoviesPage(GRID_CARD_16);
-    } else if (screenWidth <= SCRIN_1239 && screenWidth >= SCRIN_910) {
-      setMoviesPage(GRID_CARD_15);
-    } else if (screenWidth <= SCRIN_909 && screenWidth >= SCRIN_481) {
+    } else if (windowSize[0].width < SCRIN_TAB_MAX && windowSize[0].width >= SCRIN_PL_MAX) {
+      setMoviesPage(GRID_CARD_12);
+    } else if (windowSize[0].width < SCRIN_PL_MAX && windowSize[0].width >= SCRIN_PL_MIN) {
       setMoviesPage(GRID_CARD_8);
-    } else if (screenWidth <= SCRIN_480 && screenWidth >= SCRIN_320) {
+    } else if (windowSize[0].width < SCRIN_PL_MIN) {
       setMoviesPage(GRID_CARD_5);
     }
 
     return () => {
       window.removeEventListener('resize', handleScrinResize);
     };
-  }, [windowSize, windowSizeResize]);
+  }, [window.innerWidth, windowSize, windowSizeResize, isLoading]);
 
   // _______________________________________________________________ регистрация
   function handleRegistration(formValue, setErrMessage, setInfo, setFormValue, setFocusName, setFocusEmail, setFocusPass) {

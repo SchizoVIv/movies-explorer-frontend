@@ -29,6 +29,10 @@
   position: relative;
   color: #000000;
 }
+.active {
+  font-weight: 500;
+  color: blue;
+}
 .link-line:hover {
   color: #000000;
 }
@@ -54,6 +58,22 @@
 
 .header-conteiner{
   width: 100%;
+}
+
+.header__link_black {
+  color: black;
+  font-weight: 400;
+}
+
+.header__link_black:nth-child(3) {
+  max-width: 465px;
+  width: 100%;
+  text-align: left;
+}
+.header__link_black:nth-child(2) {
+  max-width: 465px;
+  width: 100%;
+  text-align: right;
 }
 
 @media screen and (max-width: 768px) {

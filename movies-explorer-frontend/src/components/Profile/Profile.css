@@ -58,6 +58,7 @@
 }
 .profile__button-edit_disabled {
   color: #d4a0a0;
+  cursor: auto;
 }
 .profile__button-exit {
   font-size: 13px;

@@ -23,23 +23,6 @@
   z-index: 2;
 }
 
-.header__link_black {
-  font-weight: 400;
-  color: black;
-}
-
-.header__link_black:nth-child(3) {
-  max-width: 465px;
-  width: 100%;
-  text-align: left;
-}
-
-.header__link_black:nth-child(2) {
-  max-width: 465px;
-  width: 100%;
-  text-align: right;
-}
-
 @media (max-width: 768px) {
   .header__container {
     max-width: 520px;
