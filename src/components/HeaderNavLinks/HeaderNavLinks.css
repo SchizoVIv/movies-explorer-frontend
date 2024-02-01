@@ -56,6 +56,25 @@
   width: 100%;
 }
 
+.header__link_black {
+  color: black;
+  font-weight: 400;
+}
+.active {
+  font-weight: 500;
+}
+
+.header__link_black:nth-child(3) {
+  max-width: 465px;
+  width: 100%;
+  text-align: left;
+}
+.header__link_black:nth-child(2) {
+  max-width: 465px;
+  width: 100%;
+  text-align: right;
+}
+
 @media screen and (max-width: 768px) {
   .header__item:first-child {
     display: block;

@@ -1,5 +1,5 @@
 import "./HeaderNavLogin.css";
-import { NavLink } from "react-router-dom";
+import { Nav, NavLink } from "react-router-dom";
 
 function HeaderNavLogin() {
   return(
