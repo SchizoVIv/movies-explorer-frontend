@@ -12,14 +12,16 @@ import {
   SCRIN_1239,
   SCRIN_910,
   SCRIN_909,
-  SCRIN_769,
-  SCRIN_768,
+  SCRIN_481,
+  SCRIN_480,
 
   GRID_CARD_16,
   GRID_CARD_15,
-  GRID_CARD_12,
   GRID_CARD_5,
   GRID_CARD_8,
+  GRID_ROW_2,
+  GRID_ROW_3,
+  GRID_ROW_4,
 } from "../../utils/constants.js"
 
 function Movies(props) {
@@ -29,16 +31,16 @@ function Movies(props) {
 
   const loadMore = () => {
     if (windowChange() >= SCRIN_1239) {
-      props.setMoviesPage(props.moviesPage + 4);
+      props.setMoviesPage(props.moviesPage + GRID_ROW_4);
     }
     if (windowChange() <= SCRIN_1239) {
-      props.setMoviesPage(props.moviesPage + 3);
+      props.setMoviesPage(props.moviesPage + GRID_ROW_3);
     }
     if (windowChange() <= SCRIN_909) {
-      props.setMoviesPage(props.moviesPage + 2);
+      props.setMoviesPage(props.moviesPage + GRID_ROW_2);
     }
-    if (windowChange() <= SCRIN_768) {
-      props.setMoviesPage(props.moviesPage + 2);
+    if (windowChange() <= SCRIN_480) {
+      props.setMoviesPage(props.moviesPage + GRID_ROW_2);
     }
   };
 
@@ -52,6 +54,9 @@ function Movies(props) {
 
   // _______________________________ расстановка рядов с карточками
 
+  console.log(localStorage.getItem('query'))
+  console.log(props.windowSize[0])
+
   useEffect(() => {
     if (props.windowSize[0] >= SCRIN_1240) {
       props.setMoviesPage(GRID_CARD_16);
@@ -59,13 +64,13 @@ function Movies(props) {
     if (props.windowSize[0] <= SCRIN_1239 && props.windowSize[0] >= SCRIN_910) {
       props.setMoviesPage(GRID_CARD_15);
     }
-    if (props.windowSize[0] <= SCRIN_909 && props.windowSize[0] >= SCRIN_769) {
+    if (props.windowSize[0] <= SCRIN_909 && props.windowSize[0] >= SCRIN_481) {
       props.setMoviesPage(GRID_CARD_8);
     }
-    if (props.windowSize[0] <= SCRIN_768 && props.windowSize[0] >= SCRIN_320) {
+    if (props.windowSize[0] <= SCRIN_480 && props.windowSize[0] >= SCRIN_320) {
       props.setMoviesPage(GRID_CARD_5);
     }
-  }, [props.windowSize, localStorage.getItem('query')]);
+  }, [props.windowSize, localStorage.getItem('query'), props.isLoading]);
 
   return (
     <>
