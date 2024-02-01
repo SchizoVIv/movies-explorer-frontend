@@ -32,7 +32,7 @@ function Profile(props) {
     }
   });
 
-  const isDisabled = (!isDirty && !isValid) || props.isLoading;
+  const isDisabled = focus === false || (!isDirty && !isValid) || props.isLoading;
 
   function onSubmit(data) {
     if (data.name !== user.currentUser.name || data.email !== user.currentUser.email) {

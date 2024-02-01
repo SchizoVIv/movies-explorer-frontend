@@ -105,7 +105,7 @@ function App() {
     return () => {
       window.removeEventListener('resize', handleScrinResize);
     };
-  }, [windowSize, windowSizeResize]);
+  }, [windowSize, windowSizeResize, isLoading]);
 
   // _______________________________________________________________ регистрация
   function handleRegistration(formValue, setErrMessage, setInfo, setFormValue, setFocusName, setFocusEmail, setFocusPass) {
