@@ -88,10 +88,6 @@ function App() {
     };
 
     window.addEventListener('resize', handleScrinResize);
-    console.log("app")
-    console.log(windowSize[0].width)
-    console.log(moviesPage)
-    console.log(currentMoviePage)
     if (windowSize[0].width >= SCRIN_TAB_MAX) {
       setMoviesPage(GRID_CARD_16);
     } else if (windowSize[0].width < SCRIN_TAB_MAX && windowSize[0].width >= SCRIN_PL_MAX) {
@@ -110,7 +106,6 @@ function App() {
   // _______________________________________________________________ регистрация
   function handleRegistration(formValue, setErrMessage, setInfo, setFormValue, setFocusName, setFocusEmail, setFocusPass) {
     const { email, password, name } = formValue;
-    console.log( email, password, name )
 
     if (!email || !password || !name) {
       setErrMessage(ERR_VALID);

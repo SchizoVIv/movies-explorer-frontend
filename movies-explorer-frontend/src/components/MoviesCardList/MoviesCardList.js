@@ -21,7 +21,6 @@ function MoviesCardList(props) {
     );
   }
 
-  console.log(props.moviesPage)
   if (location.pathname === '/movies' && !props.movieIsNotFound) {
     return (
       <main className='main'>

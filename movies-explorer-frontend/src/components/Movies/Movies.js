@@ -10,7 +10,7 @@ import {
   SCRIN_PL_MAX,
   SCRIN_PL_MIN,
   SCRIN_MOB_MIN,
-  
+
 
   GRID_CARD_16,
   GRID_CARD_12,
@@ -25,7 +25,6 @@ function Movies(props) {
 
   // ________________________________________________ кнопка "еще"
   const windowChange = () => props.windowSizeResize ? props.windowSize[0].width : props.windowSize[0];
-  console.log(`windowChange ${windowChange()}`)
 
   const loadMore = () => {
     if (windowChange() >= SCRIN_TAB_MAX) {
@@ -51,17 +50,11 @@ function Movies(props) {
   }, [props.readLess, props.currentMoviePage.length, props.allMovies.length]);
 
   // _______________________________ расстановка рядов с карточками
-
-  console.log(localStorage.getItem('query'))
-  console.log(props.windowSize[0])
-  console.log(window.innerWidth)
-
   useEffect(() => {
     if (props.windowSize[0] >= SCRIN_TAB_MAX) {
       props.setMoviesPage(GRID_CARD_16);
     }
     if (props.windowSize[0] < SCRIN_TAB_MAX && props.windowSize[0] >= SCRIN_PL_MAX) {
-      console.log("не меняется")
       props.setMoviesPage(GRID_CARD_12);
     }
     if (props.windowSize[0] < SCRIN_PL_MAX && props.windowSize[0] >= SCRIN_PL_MIN) {

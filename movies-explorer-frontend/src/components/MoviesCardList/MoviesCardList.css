@@ -14,12 +14,19 @@
 
 @media screen and (max-width: 768px) {
   .elements {
-    grid-template-columns: repeat(auto-fill, 339px);
+    grid-template-columns: repeat(auto-fill, 270px);
     gap: 36px 30px;
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 476px) {
+@media screen and (max-width: 629px) {
+  .elements {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 30px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
   .elements {
     margin: 50px auto 80px;
     grid-template-columns: repeat(auto-fill, 300px);
