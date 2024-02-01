@@ -6,17 +6,14 @@ import Header from "../Header/Header.js";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import Preloader from '../Preloader/Preloader';
 import {
-
-  SCRIN_320,
-  SCRIN_1240,
-  SCRIN_1239,
-  SCRIN_910,
-  SCRIN_909,
-  SCRIN_481,
-  SCRIN_480,
+  SCRIN_TAB_MAX,
+  SCRIN_PL_MAX,
+  SCRIN_PL_MIN,
+  SCRIN_MOB_MIN,
+  
 
   GRID_CARD_16,
-  GRID_CARD_15,
+  GRID_CARD_12,
   GRID_CARD_5,
   GRID_CARD_8,
   GRID_ROW_2,
@@ -28,18 +25,19 @@ function Movies(props) {
 
   // ________________________________________________ кнопка "еще"
   const windowChange = () => props.windowSizeResize ? props.windowSize[0].width : props.windowSize[0];
+  console.log(`windowChange ${windowChange()}`)
 
   const loadMore = () => {
-    if (windowChange() >= SCRIN_1239) {
+    if (windowChange() >= SCRIN_TAB_MAX) {
       props.setMoviesPage(props.moviesPage + GRID_ROW_4);
     }
-    if (windowChange() <= SCRIN_1239) {
+    if (windowChange() < SCRIN_TAB_MAX && windowChange() >= SCRIN_PL_MAX) {
       props.setMoviesPage(props.moviesPage + GRID_ROW_3);
     }
-    if (windowChange() <= SCRIN_909) {
+    if (windowChange() < SCRIN_PL_MAX && windowChange() >= SCRIN_PL_MIN) {
       props.setMoviesPage(props.moviesPage + GRID_ROW_2);
     }
-    if (windowChange() <= SCRIN_480) {
+    if (windowChange() < SCRIN_PL_MIN) {
       props.setMoviesPage(props.moviesPage + GRID_ROW_2);
     }
   };
@@ -56,21 +54,23 @@ function Movies(props) {
 
   console.log(localStorage.getItem('query'))
   console.log(props.windowSize[0])
+  console.log(window.innerWidth)
 
   useEffect(() => {
-    if (props.windowSize[0] >= SCRIN_1240) {
+    if (props.windowSize[0] >= SCRIN_TAB_MAX) {
       props.setMoviesPage(GRID_CARD_16);
     }
-    if (props.windowSize[0] <= SCRIN_1239 && props.windowSize[0] >= SCRIN_910) {
-      props.setMoviesPage(GRID_CARD_15);
+    if (props.windowSize[0] < SCRIN_TAB_MAX && props.windowSize[0] >= SCRIN_PL_MAX) {
+      console.log("не меняется")
+      props.setMoviesPage(GRID_CARD_12);
     }
-    if (props.windowSize[0] <= SCRIN_909 && props.windowSize[0] >= SCRIN_481) {
+    if (props.windowSize[0] < SCRIN_PL_MAX && props.windowSize[0] >= SCRIN_PL_MIN) {
       props.setMoviesPage(GRID_CARD_8);
     }
-    if (props.windowSize[0] <= SCRIN_480 && props.windowSize[0] >= SCRIN_320) {
+    if (props.windowSize[0] < SCRIN_PL_MIN && props.windowSize[0] >= SCRIN_MOB_MIN) {
       props.setMoviesPage(GRID_CARD_5);
     }
-  }, [props.windowSize, localStorage.getItem('query'), props.isLoading]);
+  }, [props.windowSize, localStorage.getItem('query'), props.isLoading, window.innerWidth]);
 
   return (
     <>
@@ -101,6 +101,7 @@ function Movies(props) {
             savedMovieList={props.savedMovieList}
             setErrors={props.setErrors}
             isLoading={props.isLoading}
+            moviesPage={props.moviesPage}
           />
         </section>
       </main>

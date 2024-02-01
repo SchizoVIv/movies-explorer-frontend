@@ -21,11 +21,13 @@ function MoviesCardList(props) {
     );
   }
 
+  console.log(props.moviesPage)
   if (location.pathname === '/movies' && !props.movieIsNotFound) {
     return (
       <main className='main'>
         <div className="elements" >
-          {props.currentMoviePage.map((movie, key) => {
+        {props.allMovies.slice(0, props.moviesPage).map((movie, key) => {
+          // {props.currentMoviePage.map((movie, key) => {
             return (
               <MoviesCard
                 onMovieClick={props.onMovieClick}

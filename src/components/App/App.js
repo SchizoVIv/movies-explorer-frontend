@@ -19,15 +19,11 @@ import {
   ERR_VALID,
   GRID_CARD_5,
   GRID_CARD_8,
-  GRID_CARD_15,
+  GRID_CARD_12,
   GRID_CARD_16,
-  SCRIN_320,
-  SCRIN_1240,
-  SCRIN_1239,
-  SCRIN_910,
-  SCRIN_909,
-  SCRIN_481,
-  SCRIN_480,
+  SCRIN_TAB_MAX,
+  SCRIN_PL_MAX,
+  SCRIN_PL_MIN,
   durationShort
 } from '../../utils/constants';
 
@@ -53,7 +49,7 @@ function App() {
   const lastIndex = currentPage * moviesPage;
   const firstIndex = lastIndex - moviesPage;
   const currentMoviePage = allMovies.slice(firstIndex, lastIndex);
-  const [screenWidth, setScreenWidth] = useState(SCRIN_1240);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   const [windowSizeResize, setWindowSizeResize] = useState(false);
   // ____________ error | info
@@ -94,13 +90,15 @@ function App() {
     window.addEventListener('resize', handleScrinResize);
     console.log("app")
     console.log(windowSize[0].width)
-    if (windowSize[0].width >= SCRIN_1240) {
+    console.log(moviesPage)
+    console.log(currentMoviePage)
+    if (windowSize[0].width >= SCRIN_TAB_MAX) {
       setMoviesPage(GRID_CARD_16);
-    } else if (windowSize[0].width <= SCRIN_1239 && windowSize[0].width >= SCRIN_910) {
-      setMoviesPage(GRID_CARD_15);
-    } else if (windowSize[0].width <= SCRIN_909 && windowSize[0].widthh >= SCRIN_481) {
+    } else if (windowSize[0].width < SCRIN_TAB_MAX && windowSize[0].width >= SCRIN_PL_MAX) {
+      setMoviesPage(GRID_CARD_12);
+    } else if (windowSize[0].width < SCRIN_PL_MAX && windowSize[0].width >= SCRIN_PL_MIN) {
       setMoviesPage(GRID_CARD_8);
-    } else if (windowSize[0].width <= SCRIN_480 && windowSize[0].width >= SCRIN_320) {
+    } else if (windowSize[0].width < SCRIN_PL_MIN) {
       setMoviesPage(GRID_CARD_5);
     }
 
