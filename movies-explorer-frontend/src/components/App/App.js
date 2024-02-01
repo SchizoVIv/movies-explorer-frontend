@@ -152,7 +152,7 @@ function App() {
   }
 
   // _______________________________________________________________ авторизция
-  function handleLogin(formValue, setErrorMessage, setFocusEmail, setFocusPass, setValidValue) {
+  function handleLogin(formValue, setErrorMessage, setFocusEmail, setFocusPass, setValidValue, focusEmail) {
     console.log(formValue)
     if (!formValue.email || !formValue.password) {
       setErrorMessage(ERR_VALID);
@@ -168,20 +168,20 @@ function App() {
           text:'Авторизация прошла успешно!'
         })
         setTimeout(() => {
+          setInfoMessage(data.message);
+        }, 3000);
+        if(focusEmail) {
           setValidValue({
             email: '',
             password: ''
           });
-          setInfoMessage(data.message);
-        }, 3000);
+        }
         setIsLoggedIn(true);
-        setFocusEmail(false);
-        setFocusPass(false);
 
         navigate('/movies');
       })
       .catch(err => {
-        setErrors(err.message);
+        // setErrors(err.message);
         ChooseInfoModal({
           text: err.message
         })
@@ -189,6 +189,10 @@ function App() {
       .finally(() => {
         setInfoMessage(null);
         setIsLoading(false);
+        if(focusEmail) {
+          setFocusEmail(false);
+          setFocusPass(false);
+        }
       });
   }
 

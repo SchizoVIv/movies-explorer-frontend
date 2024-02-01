@@ -69,7 +69,7 @@ function Login(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.handleLogin(validValue, setErrorText, setFocusEmail, setFocusPass, setInfo, setValidValue);
+    props.handleLogin(validValue, setErrorText, setFocusEmail, setFocusPass, setInfo, setValidValue, focusEmail);
   };
 
   const classErr = (conditions) => {
