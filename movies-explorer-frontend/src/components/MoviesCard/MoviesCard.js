@@ -46,7 +46,6 @@ function MoviesCard(props) {
         setIsSaved
       );
     }
-    console.log(JSON.parse(localStorage.getItem('savedMoviesList')))
   }
 
 // _________________________________________________________ клик/удаление

@@ -153,7 +153,7 @@ function App() {
 
   // _______________________________________________________________ авторизция
   function handleLogin(formValue, setErrorMessage, setFocusEmail, setFocusPass, setValidValue, focusEmail) {
-    console.log(formValue)
+
     if (!formValue.email || !formValue.password) {
       setErrorMessage(ERR_VALID);
       return;
@@ -354,7 +354,7 @@ function App() {
 
           localStorage.setItem('savedMoviesList', JSON.stringify(savedMovies))
         })
-        .MoviesApicatch(err => {
+        .catch(err => {
           setErrors(err.statusCode);
         })
         .finally(() => {
