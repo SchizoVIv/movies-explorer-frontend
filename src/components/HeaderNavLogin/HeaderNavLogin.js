@@ -1,21 +1,19 @@
 import "./HeaderNavLogin.css";
-import { Link } from "react-router-dom";
+import { Nav, NavLink } from "react-router-dom";
 
 function HeaderNavLogin() {
   return(
     <div className="header__block">
-      <Link
+      <NavLink
         className="header__button-registration link-line"
-        to="signup"
-        target="_blank">
+        to="signup">
         Регистрация
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         className="header__button-login link-hover"
-        to="signin"
-        target="_blank">
+        to="signin">
         Войти
-      </Link>
+      </NavLink>
     </div>
   )
 }

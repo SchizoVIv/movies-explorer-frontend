@@ -1,9 +1,11 @@
 .movies {
   background-color: #FAFAFA;
   max-width: 1280px;
-  padding: 70px 70px 80px;
+  width: 100%;
+  padding: 70px 50px 80px;
   margin: 0 auto;
   box-sizing: border-box;
+  flex-grow: 1;
 }
 
 .further {
@@ -28,6 +30,11 @@
   background-color: #DDDEE3;
 }
 
+.further__button_hidden {
+  overflow: hidden;
+  visibility: hidden;
+}
+
 @media screen and (max-width: 989px) {
   .movies {
     padding: 80px 30px 80px;
@@ -42,7 +49,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
   .movies {
     background-color: #FAFAFA;
     max-width: 320px;

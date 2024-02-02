@@ -10,15 +10,20 @@
 - '/saved-movies' - отображается страница «Сохранённые фильмы»;
 - '/profile' - отображается страница с профилем пользователя;
 
+## Ссылки
+
+- Frontend: https://schizovi.diplom.nomoredomainsmonster.ru
+
+- Backend: https://api.schizovi.diplom.nomoredomainsmonster.ru
+
+- GitHub pull request: https://github.com/SchizoVIv/movies-explorer-frontend/pull/3
 ## Макет
 
 - light-3
 
 ## Ветки
 
-- level-2
-
-- https://github.com/SchizoVIv/movies-explorer-frontend/pull/1
+- level-3
 
 ## Скрипты
 
