@@ -6,7 +6,7 @@ function Footer() {
       <footer className="footer">
         <h2 className="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</h2>
         <div className="footer__block-of-link">
-          <p className="footer__age">© 2020</p>
+          <p className="footer__age">© 2024</p>
           <ul className="footer__list">
             <li className="footer__item">
               <NavLink
